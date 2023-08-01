@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { firebase } from "../config";
 
+
 const Login = () => {
     const navigation = useNavigation();
     const {email, setEmail} = useState('');
@@ -17,9 +18,8 @@ const Login = () => {
     }
 
     return(
-        <View style={styles.container}>
-            <Text style={{fontWeight: 'bold', fontSize:26}}>Login</Text>
-            <View style={{marginTop:40}}>
+        
+            <View style={styles.container}>
                 <TextInput 
                     style={styles.TextInput}
                     placeholder="Email"
@@ -35,7 +35,7 @@ const Login = () => {
                     autoCorrect={false}
                     secureTextEntry={true}
                 />
-            </View>
+           
             <TouchableOpacity
                 onPress={() => loginUser(email, password)}
                 style={styles.button}
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop:100,
     },
-    textInput: {
+    TextInput: {
         paddingTop:20,
         paddingBottom:10,
         width:400,
@@ -78,9 +78,91 @@ const styles = StyleSheet.create({
         marginTop:50,
         height:70,
         width:250,
-        backgroundColor:'#026efd',
+        backgroundColor:'#FFAEBC',
         alignItems:'center',
         justifyContent: 'center',
         borderRadius:50,
     }
 })
+
+
+
+/*const {initializing, setInitializing} = useState(true);
+  const {user, setUser} = useState;
+
+  function onAuthStateChanged(user){
+    setUser(user);
+    if(initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+
+  if(initializing) return null;
+
+  if(!user){
+    return (
+      <Stack.Navigator>
+        <Stack.Screen 
+        name="Login" 
+        component={Login} 
+        options={{
+          headerTitle: () => <Header name="MPHR Login"/>,
+          headerStyle:{
+            height: 150,
+            borderBottomLeftRadius:50,
+            borderBottomRightRadius:50,
+            backgroundColor:'#00e4d0',
+            shadowColos: '#000',
+            elevation: 25
+          }
+        }}
+        />*
+
+<Stack.Screen 
+        name="Register" 
+        component={Register} 
+        options={{
+          headerTitle: () => <Header name="MPHR Register"/>,
+          headerStyle:{
+            height: 150,
+            borderBottomLeftRadius:50,
+            borderBottomRightRadius:50,
+            backgroundColor:'#00e4d0',
+            shadowColos: '#000',
+            elevation: 25
+          }
+        }}
+        />
+      </Stack.Navigator>
+    );
+  }
+  return(
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="Dashboard" 
+        component={Dashboard} 
+        options={{
+          headerTitle: () => <Header name="MPHR Dashboard"/>,
+          headerStyle:{
+            height: 150,
+            borderBottomLeftRadius:50,
+            borderBottomRightRadius:50,
+            backgroundColor:'#00e4d0',
+            shadowColos: '#000',
+            elevation: 25
+          }
+        }}
+        />
+    </Stack.Navigator>
+  );
+}
+
+export default () =>{
+  return (
+    <NavigationContainer>
+      <App />
+    </NavigationContainer>
+  )*/
