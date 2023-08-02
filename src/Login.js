@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { auth, firebase } from "../config";
 
@@ -8,12 +8,22 @@ const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const handleSignUp = () => {
+
+  useEffect(() => {
+    const unsubscribe =  auth.onAuthStateChanged(user => {
+      if(user){
+        navigation.navigate('Dashboard');
+      }
+    })
+    return unsubscribe;
+  },[])
+
+  const handleLogIn = () => {
     auth
-    .createUserWithEmailAndPassword(email, password)
+    .signInWithEmailAndPassword(email, password)
     .then(userCredentials => {
       const user = userCredentials.user;
-      console.log(user.email);
+      console.log('Loggin in with', user.email);
     })
     .catch(error => alert(error.message))
   }
@@ -39,7 +49,7 @@ const Login = () => {
                     secureTextEntry
       />
       <TouchableOpacity
-                onPress={() => loginUser(email, password)}
+                onPress={handleLogIn}
                 style={styles.button}
             >
                 <Text style={{fontWeight:'bold', fontSize:22}}>

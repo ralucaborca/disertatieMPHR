@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import Homepage from './src/Homepage';
 import Register from './src/Register';
 import Login from './src/Login';
+import Dashboard from './src/Dashboard';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ const App = (props) => {
         <Stack.Screen name="HomePage" component={Homepage}/>
         <Stack.Screen name="Register" component={Register}/>
         <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Dashboard" component={Dashboard}/>
       </Stack.Navigator>
     </NavigationContainer>
       

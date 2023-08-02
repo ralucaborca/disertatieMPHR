@@ -4,7 +4,7 @@ import { useNavigation} from '@react-navigation/native';
 import { auth, firebase } from "../config";
 
 const Register = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSignUp = () => {
