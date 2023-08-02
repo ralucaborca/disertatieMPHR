@@ -1,45 +1,47 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from "react-native";
+import React, {useState} from "react";
+import { useNavigation} from '@react-navigation/native';
+import { auth, firebase } from "../config";
 
-const Register = ({navigation}) => {
-    return (
-        <View style={styles.container}>
-            <TextInput 
-                style={styles.TextInput}
-                placeholder="Nume"
-                autoCapitalize="none"
-                autoCorrect={false}
-            />
-            <TextInput 
-                style={styles.TextInput}
-                placeholder="Prenume"
-                autoCapitalize="none"
-                autoCorrect={false}
-            />
-            <TextInput 
-                style={styles.TextInput}
-                placeholder="Email"
-                autoCapitalize="none"
-                autoCorrect={false}
-            />
-            <TextInput 
-                style={styles.TextInput}
-                placeholder="Password"
-                autoCapitalize="none"
-                autoCorrect={false}
-                secureTextEntry={true}
-            />
-            <TextInput 
-                style={styles.TextInput}
-                placeholder="Reintroducere parola"
-                autoCapitalize="none"
-                autoCorrect={false}
-            />
+const Register = () => {
+    const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleSignUp = () => {
+    auth
+    .createUserWithEmailAndPassword(email, password)
+    .then(userCredentials => {
+      const user = userCredentials.user;
+      console.log(user.email);
+    })
+    .catch(error => alert(error.message))
+  }
+
+  return(
+    <KeyboardAvoidingView style={styles.container}>
+      <View style={styles.container}>
+      <TextInput 
+                    style={styles.TextInput}
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+      />
+       <TextInput 
+                    style={styles.TextInput}
+                    placeholder="Parola"
+                    value={password}
+                    onChangeText={(text) => setPassword(text)}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    secureTextEntry
+      />
             <TouchableOpacity
-                onPress={() => loginUser(email, password)}
+                onPress={handleSignUp}
                 style={styles.button}
             >
-                <Text style={{fontWeight:'bold', fontSize:22}}>
+                <Text style={{fontWeight:'bold', fontSize:16}}>
                     Register
                     </Text>
             </TouchableOpacity>
@@ -48,11 +50,13 @@ const Register = ({navigation}) => {
                 style={{marginTop:20}}
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Ai deja cont? Intra in cont.
+                    Ai deja cont? Intra in cont acum.
                     </Text>
             </TouchableOpacity>
-        </View>
-    )
+      </View>
+      
+    </KeyboardAvoidingView>
+  )
 }
 
 export default Register;

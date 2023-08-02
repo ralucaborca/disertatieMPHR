@@ -1,11 +1,64 @@
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from "react-native";
 import React, {useState} from "react";
 import { useNavigation} from '@react-navigation/native';
-import { firebase } from "../config";
+import { auth, firebase } from "../config";
 
 
 const Login = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleSignUp = () => {
+    auth
+    .createUserWithEmailAndPassword(email, password)
+    .then(userCredentials => {
+      const user = userCredentials.user;
+      console.log(user.email);
+    })
+    .catch(error => alert(error.message))
+  }
+
+  return(
+    <KeyboardAvoidingView style={styles.container}>
+      <View style={styles.container}>
+      <TextInput 
+                    style={styles.TextInput}
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+      />
+       <TextInput 
+                    style={styles.TextInput}
+                    placeholder="Parola"
+                    value={password}
+                    onChangeText={(text) => setPassword(text)}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    secureTextEntry
+      />
+      <TouchableOpacity
+                onPress={() => loginUser(email, password)}
+                style={styles.button}
+            >
+                <Text style={{fontWeight:'bold', fontSize:22}}>
+                    Login
+                    </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Register')}
+                style={{marginTop:20}}
+            >
+                <Text style={{fontWeight:'bold', fontSize:16}}>
+                    Nu ai cont? Inregistreaza-te acum.
+                    </Text>
+            </TouchableOpacity>
+      </View>
+      
+    </KeyboardAvoidingView>
+  )
+    /*const navigation = useNavigation();
     const {email, setEmail} = useState('');
     const {password, setPassword} = useState('');
 
@@ -53,7 +106,7 @@ const Login = () => {
                     </Text>
             </TouchableOpacity>
         </View>
-    )
+    )*/
 }
 
 export default Login;

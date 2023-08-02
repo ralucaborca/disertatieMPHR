@@ -1,5 +1,4 @@
 //Configurarea firebase
-
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 import 'firebase/compat/auth';
@@ -15,8 +14,14 @@ const firebaseConfig = {
   measurementId: "G-J81FNB12YL"
 }
 
-if(!firebase.apps.length){
-    firebase.initializeApp(firebaseConfig);
+let app;
+if(firebase.apps.length === 0){
+    app = firebase.initializeApp(firebaseConfig);
+}else{
+  app = firebase.app();
 }
 
-export { firebase };
+const auth = firebase.auth();
+
+export {auth};
+
