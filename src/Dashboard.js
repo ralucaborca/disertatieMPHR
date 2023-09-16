@@ -1,17 +1,24 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { auth } from "../config";
+import { NavigationContainer, useNavigation} from '@react-navigation/native';
+import Footertabs from "./navigation/Footertabs";
 
 const Dashboard = () => {
-   
+   const navigation = useNavigation();
+   const handlerSignOut = () => {
+    auth
+    .signOut()
+    .then(() => {
+        navigation.replace('Login');
+    })
+    .catch(error => alert(error.message))
+   }
 
     return (
-        <View style={styles.container}>
-            <Text> Email: {auth.currentUser?.email}</Text>
-            <TouchableOpacity style={styles.button}>
-                <Text>Sign Out</Text>
-            </TouchableOpacity>
-        </View>
+            <NavigationContainer independent={true} style={styles.container}>
+                <Footertabs/>
+            </NavigationContainer>
     )
 }
 

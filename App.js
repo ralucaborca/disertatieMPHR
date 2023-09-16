@@ -10,17 +10,23 @@ import Homepage from './src/Homepage';
 import Register from './src/Register';
 import Login from './src/Login';
 import Dashboard from './src/Dashboard';
+import AddScreen from './src/screens/AddScreen';
+import ChatScreen from './src/screens/ChatScreen';
+import HistoryScreen from './src/screens/HistoryScreen';
+import Screen from './src/screens/Screen';
+import Footertabs from './src/navigation/Footertabs';
 
 const Stack = createStackNavigator();
 
 const App = (props) => {
   return(
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Stack.Navigator>
         <Stack.Screen name="HomePage" component={Homepage}/>
         <Stack.Screen name="Register" component={Register}/>
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Dashboard" component={Dashboard}/>
+        <Stack.Screen name="Footertabs" component={Footertabs}/>
       </Stack.Navigator>
     </NavigationContainer>
       
