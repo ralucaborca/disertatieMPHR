@@ -1,10 +1,10 @@
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import Dashboard from "../Dashboard";
 import AddScreen from "../screens/AddScreen";
 import ChatScreen from "../screens/ChatScreen";
 import HistoryScreen from "../screens/HistoryScreen";
+import FirstScreen from "../screens/FirstScreen";
 import Screen from "../screens/Screen";
-import { View } from "react-native";
+import { View, Image, Text, Icon, Ionicons } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,8 +22,11 @@ const Footertabs = () =>{
                 borderRadius: 15,
                 height: 90,
             }
+          
         }}
         >
+
+            <Tab.Screen name="FirstScreen" component={FirstScreen} />
             <Tab.Screen name="AddScreen" component={AddScreen} />
             <Tab.Screen name="ChatScreen" component={ChatScreen} />
             <Tab.Screen name="HistoryScreen" component={HistoryScreen} />

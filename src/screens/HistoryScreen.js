@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Footer, FooterTab, Button, Icon } from "react-native";
 import React from "react";
 import { useNavigation} from '@react-navigation/native';
 
@@ -7,7 +7,11 @@ const HistoryScreen = () => {
     return (
         <View style={styles.container}>
             <Text> HistoryScreenScreen</Text>
+            <Text> Inregistrare: {auth.currentUser?.email}</Text>
+
         </View>
+
+     
     )
 }
 

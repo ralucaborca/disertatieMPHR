@@ -5,20 +5,10 @@ import { NavigationContainer, useNavigation} from '@react-navigation/native';
 import Footertabs from "./navigation/Footertabs";
 
 const Dashboard = () => {
-   const navigation = useNavigation();
-   const handlerSignOut = () => {
-    auth
-    .signOut()
-    .then(() => {
-        navigation.replace('Login');
-    })
-    .catch(error => alert(error.message))
-   }
-
     return (
-            <NavigationContainer independent={true} style={styles.container}>
-                <Footertabs/>
-            </NavigationContainer>
+    <NavigationContainer independent={true} style={styles.container}>
+        <Footertabs/>
+    </NavigationContainer>
     )
 }
 
