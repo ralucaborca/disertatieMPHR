@@ -1,11 +1,12 @@
-import { View, TextInput, Button, Alert, StyleSheet, TouchableOpacity } from "react-native";
-import React, {useState} from "react";
+import { View, TextInput, Button, Alert, StyleSheet, TouchableOpacity, Text } from "react-native";
+import React, {useState, useEffect} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { database, firebase } from '../../config';
 import {ref, set} from 'firebase/compat/database';
+import { auth } from "../../config";
 
 const AddScreen = () => {
-    
+    const [user, setUser] = useState('');
     const [sex, setSex] = useState('');
     const [varsta, setVarsta] = useState('');
     const [inaltime, setInaltime] = useState('');
@@ -16,7 +17,6 @@ const AddScreen = () => {
   
     const handleSaveData = () => {
         if (sex && varsta && inaltime && greutate && afectiune && fumator && practicSport) {
-            // Add data to Firebase Realtime Database
             database.ref().child('Date pacient').push({
               sex: sex,
               varsta: varsta,
@@ -45,7 +45,7 @@ const AddScreen = () => {
     };
   
     return (
-      <View>
+      <View style="styles.container">
         <TextInput
           placeholder="Sex"
           value={sex}

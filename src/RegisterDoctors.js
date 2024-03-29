@@ -3,14 +3,13 @@ import React, {useState} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { auth, firebase, database } from "../config";
 
-const Register = () => {
+const RegisterDoctors = () => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
+  const [adresaCabinet, setAdresaCabinet] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
   const handleSignUp = () => {
     if (password !== confirmPassword) {
       setErrorMessage("Cele 2 parole nu se potrivesc!");
@@ -19,9 +18,10 @@ const Register = () => {
     auth
     .createUserWithEmailAndPassword(email, password)
     .then(userCredentials => {
-      database.ref().child('Pacienti/' + userCredentials.user.uid).set({
+      database.ref().child('Doctori/' + userCredentials.user.uid).set({
         name: name,
-        email: email
+        email: email,
+        adresaCabinet: adresaCabinet
       }).then(() => {
         console.log("User data added to Firebase Realtime Database");
       }).catch(error => {
@@ -41,6 +41,14 @@ const Register = () => {
                     placeholder="Name"
                     value={name}
                     onChangeText={(text) => setName(text)}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+      />
+      <TextInput 
+                    style={styles.TextInput}
+                    placeholder="Adresa Cabinet"
+                    value={adresaCabinet}
+                    onChangeText={(text) => setAdresaCabinet(text)}
                     autoCapitalize="none"
                     autoCorrect={false}
       />
@@ -92,7 +100,7 @@ const Register = () => {
   )
 }
 
-export default Register;
+export default RegisterDoctors;
 
 const styles = StyleSheet.create({
     container: {

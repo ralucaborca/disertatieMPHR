@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { withNavigation } from "react-navigation";
 import Register from "./Register";
+import RegisterDoctors from "./RegisterDoctors";
 
 function Homepage({ navigation }) {
     
@@ -22,6 +23,14 @@ function Homepage({ navigation }) {
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>
                     Register
+                    </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('RegisterDoctors')}
+                style={styles.button}
+            >
+                <Text style={{fontWeight:'bold', fontSize:16}}>
+                    RegisterDoctors
                     </Text>
             </TouchableOpacity>
       </View>

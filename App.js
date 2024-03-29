@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import Homepage from './src/Homepage';
 import Register from './src/Register';
+import RegisterDoctors from './src/RegisterDoctors';
 import Login from './src/Login';
 import Dashboard from './src/Dashboard';
 import AddScreen from './src/screens/AddScreen';
@@ -24,6 +25,7 @@ const App = (props) => {
       <Stack.Navigator>
         <Stack.Screen name="HomePage" component={Homepage}/>
         <Stack.Screen name="Register" component={Register}/>
+        <Stack.Screen name="RegisterDoctors" component={RegisterDoctors}/>
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Dashboard" component={Dashboard}/>
         <Stack.Screen name="Footertabs" component={Footertabs}/>
