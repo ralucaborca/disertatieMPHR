@@ -1,36 +1,46 @@
 import { StyleSheet, View, Text, FlatList  } from "react-native";
 import React, {useState, useEffect} from "react";
-import {database} from '../../config';
+import {database, auth } from '../../config';
 
 const HistoryScreen = () => {
     const [data, setData] = useState([]);
+    const [userq, setUserQ] = useState(null);
+
+  
+    const fetchData = async (user) => {
+      try {
+        const snapshot = await database.ref('Date pacient').orderByChild('user').equalTo(user).once('value');
+        const dataArr = [];
+        console.log(snapshot)
+        snapshot.forEach((childSnapshot) => {
+          dataArr.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val(),
+          });
+        });
+        setData(dataArr);
+      } catch (error) {
+        console.log('Error fetching data: ', error);
+      }
+    };
 
     useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const snapshot = await database.ref().child('Date pacient').once('value');
-          const dataArr = [];
-          snapshot.forEach((childSnapshot) => {
-            dataArr.push({
-              id: childSnapshot.key,
-              ...childSnapshot.val(),
-            });
-          });
-          setData(dataArr);
-          console.log(data);
-        } catch (error) {
-          console.log('Error fetching data: ', error);
+      const unsubscribe = auth.onAuthStateChanged((user) => {
+        if (user) {
+          setUserQ(user);
+          fetchData(user.uid);
+        } else {
+          setData([]);
+          setUserQ(null);
         }
-      };
+      });
   
-      fetchData();
-  
-      return () => {
-        // Cleanup function if needed
-      };
+      return () => unsubscribe();
     }, []);
+
     const renderItem = ({ item }) => (
       <View  style={styles.itemContainer}>
+        <Text>Data adaugarii: {item.dateAdded}</Text>
         <Text>Fumator: {item.fumator}</Text>
         <Text>Greutate: {item.greutate}</Text>
         <Text>Afectiune: {item.afectiune}</Text>
@@ -38,7 +48,6 @@ const HistoryScreen = () => {
         <Text>Pacientul practica sport: {item.practicSport}</Text>
         <Text>Sex: {item.sex}</Text>
         <Text>Varsta: {item.varsta}</Text>
-        
       </View>
       
     );

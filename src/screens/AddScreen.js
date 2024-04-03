@@ -17,15 +17,20 @@ const AddScreen = () => {
 
     useEffect(() => {
       const subscriber = auth.onAuthStateChanged(user => {
-        setUser(user); // Set the current user
+        setUser(user);
       });
-  
-      // Unsubscribe on component unmount
       return subscriber;
     }, []); 
+
+    const formatDateTime = (date) => {
+      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      return date.toLocaleDateString('en-GB', options);
+    };
   
     const handleSaveData = () => {
         if (user && sex && varsta && inaltime && greutate && afectiune && fumator && practicSport) {
+          const currentDate = new Date();
+           const formattedDate = formatDateTime(currentDate);
             database.ref().child('Date pacient').push({
               user: user.uid,
               sex: sex,
@@ -34,7 +39,8 @@ const AddScreen = () => {
               greutate: greutate,
               afectiune: afectiune,
               fumator: fumator,
-              practicSport: practicSport
+              practicSport: practicSport,
+              dateAdded: formattedDate
             })
             .then(() => {
               Alert.alert('Success', 'Datele au fost adaugate cu success!');
