@@ -11,11 +11,8 @@ import Register from './src/Register';
 import RegisterDoctors from './src/RegisterDoctors';
 import Login from './src/Login';
 import Dashboard from './src/Dashboard';
-import AddScreen from './src/screens/AddScreen';
-import ChatScreen from './src/screens/ChatScreen';
-import HistoryScreen from './src/screens/HistoryScreen';
-import Screen from './src/screens/Screen';
 import Footertabs from './src/navigation/Footertabs';
+import Profile from './src/DoctorScreens/Profile';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +26,7 @@ const App = (props) => {
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Dashboard" component={Dashboard}/>
         <Stack.Screen name="Footertabs" component={Footertabs}/>
+        <Stack.Screen name="Profile" component={Profile}/>
       </Stack.Navigator>
     </NavigationContainer>
       

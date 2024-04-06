@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from "react-native";
 import React, {useEffect, useState} from "react";
 import { useNavigation} from '@react-navigation/native';
-import { auth, firebase } from "../config";
+import { auth, database } from "../config";
 
 
 const Login = () => {
