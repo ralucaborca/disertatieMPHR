@@ -1,12 +1,14 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
+import { auth } from "../../config";
 import { useNavigation} from '@react-navigation/native';
 
 const Profile = () => {
     
     return (
         <View style={styles.container}>
-            <Text> Profile</Text>
+            <Text> Email: {auth.currentUser?.email}</Text>
+            
         </View>
     )
 }

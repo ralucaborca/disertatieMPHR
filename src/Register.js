@@ -6,6 +6,7 @@ import { auth, firebase, database } from "../config";
 const Register = () => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
+  const [prenume, setPrenume] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -21,14 +22,14 @@ const Register = () => {
     .then(userCredentials => {
       database.ref().child('Pacienti/' + userCredentials.user.uid).set({
         name: name,
+        prenume: prenume,
         email: email
       }).then(() => {
         console.log("User data added to Firebase Realtime Database");
       }).catch(error => {
         console.error("Error adding user data to Firebase Realtime Database:", error);
       });
-      //const user = userCredentials.user;
-      //console.log(user.email);
+     
     })
     .catch(error => alert(error.message))
   }
@@ -41,6 +42,14 @@ const Register = () => {
                     placeholder="Name"
                     value={name}
                     onChangeText={(text) => setName(text)}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+      />
+      <TextInput 
+                    style={styles.TextInput}
+                    placeholder="Prenume"
+                    value={prenume}
+                    onChangeText={(text) => setPrenume(text)}
                     autoCapitalize="none"
                     autoCorrect={false}
       />

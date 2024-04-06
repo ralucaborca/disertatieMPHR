@@ -6,6 +6,7 @@ import { auth, firebase, database } from "../config";
 const RegisterDoctors = () => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
+  const [prenume, setPrenume] = useState('');
   const [adresaCabinet, setAdresaCabinet] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +21,7 @@ const RegisterDoctors = () => {
     .then(userCredentials => {
       database.ref().child('Doctori/' + userCredentials.user.uid).set({
         name: name,
+        prenume: prenume,
         email: email,
         adresaCabinet: adresaCabinet
       }).then(() => {
@@ -27,8 +29,6 @@ const RegisterDoctors = () => {
       }).catch(error => {
         console.error("Error adding user data to Firebase Realtime Database:", error);
       });
-      //const user = userCredentials.user;
-      //console.log(user.email);
     })
     .catch(error => alert(error.message))
   }
@@ -41,6 +41,14 @@ const RegisterDoctors = () => {
                     placeholder="Name"
                     value={name}
                     onChangeText={(text) => setName(text)}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+      />
+      <TextInput 
+                    style={styles.TextInput}
+                    placeholder="Prenume"
+                    value={prenume}
+                    onChangeText={(text) => setPrenume(text)}
                     autoCapitalize="none"
                     autoCorrect={false}
       />
@@ -106,7 +114,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems:'center',
-        marginTop:100,
+        marginTop:30,
     },
     TextInput: {
         paddingTop:20,
