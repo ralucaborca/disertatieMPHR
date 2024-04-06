@@ -9,23 +9,26 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    const unsubscribe =  auth.onAuthStateChanged(user => {
-      if(user){
-        navigation.navigate('Dashboard');
-      }
-    })
-    return unsubscribe;
-  },[])
-
   const handleLogIn = () => {
     auth
-    .signInWithEmailAndPassword(email, password)
-    .then(userCredentials => {
-      const user = userCredentials.user;
-      console.log('Loggin in with', user.email);
-    })
-    .catch(error => alert(error.message))
+      .signInWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.log('Logging in with', user.email);
+        
+        database.ref('Doctori/' + user.uid).once('value').then(snapshot => {
+          if (snapshot.exists()) {
+            // User is a doctor
+            navigation.navigate('Profile');
+          } else {
+            // User is a patient
+            navigation.navigate('Dashboard');
+          }
+        }).catch(error => {
+          console.error("Error checking user type:", error);
+        });
+      })
+      .catch(error => alert(error.message))
   }
 
   return(
@@ -68,55 +71,6 @@ const Login = () => {
       
     </KeyboardAvoidingView>
   )
-    /*const navigation = useNavigation();
-    const {email, setEmail} = useState('');
-    const {password, setPassword} = useState('');
-
-    loginUser = async (email, password) => {
-        try{
-            await firebase.auth().signInWithEmailAndPassword(email,password)
-        }catch(error){
-            alert(error.message)
-        }
-    }
-
-    return(
-        
-            <View style={styles.container}>
-                <TextInput 
-                    style={styles.TextInput}
-                    placeholder="Email"
-                    onChangeText={(email) => setEmail(email)}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
-                <TextInput 
-                    style={styles.TextInput}
-                    placeholder="Password"
-                    onChangeText={(password) => setPassword(password)}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    secureTextEntry={true}
-                />
-           
-            <TouchableOpacity
-                onPress={() => loginUser(email, password)}
-                style={styles.button}
-            >
-                <Text style={{fontWeight:'bold', fontSize:22}}>
-                    Login
-                    </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => navigation.navigate('Register')}
-                style={{marginTop:20}}
-            >
-                <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Don't have an account? Register now!
-                    </Text>
-            </TouchableOpacity>
-        </View>
-    )*/
 }
 
 export default Login;
