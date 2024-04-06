@@ -13,6 +13,9 @@ import Login from './src/Login';
 import Dashboard from './src/Dashboard';
 import Footertabs from './src/navigation/Footertabs';
 import Profile from './src/DoctorScreens/Profile';
+import PacientsList from './src/DoctorScreens/PacientsList';
+import Feedback from './src/DoctorScreens/Feedback';
+import ChatWPacient from './src/DoctorScreens/ChatWPacient';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +30,9 @@ const App = (props) => {
         <Stack.Screen name="Dashboard" component={Dashboard}/>
         <Stack.Screen name="Footertabs" component={Footertabs}/>
         <Stack.Screen name="Profile" component={Profile}/>
+        <Stack.Screen name="PacientsList" component={PacientsList}/>
+        <Stack.Screen name="Feedback" component={Feedback}/>
+        <Stack.Screen name="ChatWPacient" component={ChatWPacient}/>
       </Stack.Navigator>
     </NavigationContainer>
       

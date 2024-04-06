@@ -1,8 +1,6 @@
 import { View, TextInput, Button, Alert, StyleSheet, TouchableOpacity, Text, KeyboardAvoidingView } from "react-native";
 import React, {useState, useEffect} from "react";
-import { useNavigation} from '@react-navigation/native';
 import { database, firebase } from '../../config';
-import {ref, set} from 'firebase/compat/database';
 import { auth } from "../../config";
 
 const AddScreen = () => {

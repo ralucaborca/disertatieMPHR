@@ -19,7 +19,7 @@ const Login = () => {
         database.ref('Doctori/' + user.uid).once('value').then(snapshot => {
           if (snapshot.exists()) {
             // User is a doctor
-            navigation.navigate('Profile');
+            navigation.navigate('PacientsList');
           } else {
             // User is a patient
             navigation.navigate('Dashboard');
