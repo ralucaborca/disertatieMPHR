@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from "react-native";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { auth, firebase, database } from "../config";
 
@@ -11,6 +11,12 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: 'Register Pacient', // Change this to the desired title
+    });
+  }, [navigation]);
 
   const handleSignUp = () => {
     if (password !== confirmPassword) {
@@ -36,7 +42,7 @@ const Register = () => {
 
   return(
     <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.container}>
+      <View style={styles.formContainer}>
       <TextInput 
                     style={styles.TextInput}
                     placeholder="Name"
@@ -91,12 +97,11 @@ const Register = () => {
                 onPress={() => navigation.navigate('Login')}
                 style={{marginTop:20}}
             >
-                <Text style={{fontWeight:'bold', fontSize:16}}>
+                <Text style={{fontWeight:'bold', fontSize:15}}>
                     Ai deja cont? Intra in cont acum.
                     </Text>
             </TouchableOpacity>
       </View>
-      
     </KeyboardAvoidingView>
   )
 }
@@ -104,28 +109,36 @@ const Register = () => {
 export default Register;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems:'center',
-        marginTop:100,
-    },
-    TextInput: {
-        paddingTop:20,
-        paddingBottom:10,
-        width:400,
-        fontSize:20,
-        borderBottomWidth:1,
-        borderBottomColor:'#000',
-        marginBottom:10,
-        textAlign:'center',
-    },
-    button:{
-        marginTop:50,
-        height:70,
-        width:250,
-        backgroundColor:'#A4E8E0',
-        alignItems:'center',
-        justifyContent: 'center',
-        borderRadius:50,
-    }
+  container: {
+    flex: 1,
+    alignItems:'center',
+    marginTop:50,
+    padding: 20,
+    borderRadius: 20
+},
+formContainer: {
+  width: '85%',
+  backgroundColor: '#fff',
+  padding: 20,
+  borderRadius: 10,
+  elevation: 5, // Shadow effect
+},
+TextInput: {
+    paddingTop:20,
+    paddingBottom:10,
+    fontSize:20,
+    borderBottomWidth:1,
+    borderBottomColor:'#000',
+    marginBottom:10,
+    textAlign:'center',
+},
+button:{
+    marginTop:50,
+    height:70,
+    width:250,
+    backgroundColor:'#A4E8E0',
+    alignItems:'center',
+    justifyContent: 'center',
+    borderRadius:50,
+}
 })

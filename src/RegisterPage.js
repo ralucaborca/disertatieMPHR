@@ -1,42 +1,46 @@
-import { View, Text, TouchableOpacity, StyleSheet, Button} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image} from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { withNavigation } from "react-navigation";
 import Register from "./Register";
 import RegisterDoctors from "./RegisterDoctors";
 
-function Homepage() {
+function RegisterPage () {
     const navigation = useNavigation();
 
     useEffect(() => {
         navigation.setOptions({
-          title: 'Prima pagina', // Change this to the desired title
+          title: 'Register', // Change this to the desired title
         });
       }, [navigation]);
-
+    
     return (
       <View style={styles.container}>
+        <Image 
+        source={require('../assets/logo.png')}
+        style={styles.image}
+        />
         <TouchableOpacity
-                onPress={() => navigation.navigate('Login')}
+                onPress={() => navigation.navigate('Register')}
                 style={styles.button}
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Login
+                    Register Pacient
                     </Text>
             </TouchableOpacity>
-        <TouchableOpacity
-                onPress={() => navigation.navigate('RegisterPage')}
+            <TouchableOpacity
+                onPress={() => navigation.navigate('RegisterDoctors')}
                 style={styles.button}
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Register
+                    Register Doctor
                     </Text>
             </TouchableOpacity>
       </View>
     );
   }
 
-export default Homepage;
+export default RegisterPage;
 
 const styles = StyleSheet.create({
     container: {
@@ -62,5 +66,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent: 'center',
         borderRadius:50,
-    }
+    },
+    image: {
+        width: 200,
+        height: 200,
+        resizeMode: 'contain', // Adjust the image content mode as needed
+    },
   })

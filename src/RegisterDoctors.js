@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from "react-native";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { auth, firebase, database } from "../config";
 
@@ -11,6 +11,14 @@ const RegisterDoctors = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  
+  useEffect(() => {
+    navigation.setOptions({
+      title: 'Register Doctor', // Change this to the desired title
+    });
+  }, [navigation]);
+
   const handleSignUp = () => {
     if (password !== confirmPassword) {
       setErrorMessage("Cele 2 parole nu se potrivesc!");
@@ -35,7 +43,7 @@ const RegisterDoctors = () => {
 
   return(
     <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.container}>
+      <View style={styles.formContainer}>
       <TextInput 
                     style={styles.TextInput}
                     placeholder="Name"
@@ -98,7 +106,7 @@ const RegisterDoctors = () => {
                 onPress={() => navigation.navigate('Login')}
                 style={{marginTop:20}}
             >
-                <Text style={{fontWeight:'bold', fontSize:16}}>
+                <Text style={{fontWeight:'bold', fontSize:15}}>
                     Ai deja cont? Intra in cont acum.
                     </Text>
             </TouchableOpacity>
@@ -114,12 +122,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems:'center',
-        marginTop:30,
+        marginTop:50,
+        padding: 20,
+        borderRadius: 20
+    },
+    formContainer: {
+      width: '85%',
+      backgroundColor: '#fff',
+      padding: 20,
+      borderRadius: 10,
+      elevation: 5, // Shadow effect
     },
     TextInput: {
         paddingTop:20,
         paddingBottom:10,
-        width:400,
         fontSize:20,
         borderBottomWidth:1,
         borderBottomColor:'#000',

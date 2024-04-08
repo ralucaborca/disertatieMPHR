@@ -33,7 +33,7 @@ const Login = () => {
 
   return(
     <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.container}>
+      <View style={styles.formContainer}>
       <TextInput 
                     style={styles.TextInput}
                     placeholder="Email"
@@ -76,110 +76,36 @@ const Login = () => {
 export default Login;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems:'center',
-        marginTop:100,
-    },
-    TextInput: {
-        paddingTop:20,
-        paddingBottom:10,
-        width:400,
-        fontSize:20,
-        borderBottomWidth:1,
-        borderBottomColor:'#000',
-        marginBottom:10,
-        textAlign:'center',
-    },
-    button:{
-        marginTop:50,
-        height:70,
-        width:250,
-        backgroundColor:'#FFAEBC',
-        alignItems:'center',
-        justifyContent: 'center',
-        borderRadius:50,
-    }
-})
-
-
-
-/*const {initializing, setInitializing} = useState(true);
-  const {user, setUser} = useState;
-
-  function onAuthStateChanged(user){
-    setUser(user);
-    if(initializing) setInitializing(false);
-  }
-
-  useEffect(() => {
-    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber;
-  }, []);
-
-  if(initializing) return null;
-
-  if(!user){
-    return (
-      <Stack.Navigator>
-        <Stack.Screen 
-        name="Login" 
-        component={Login} 
-        options={{
-          headerTitle: () => <Header name="MPHR Login"/>,
-          headerStyle:{
-            height: 150,
-            borderBottomLeftRadius:50,
-            borderBottomRightRadius:50,
-            backgroundColor:'#00e4d0',
-            shadowColos: '#000',
-            elevation: 25
-          }
-        }}
-        />*
-
-<Stack.Screen 
-        name="Register" 
-        component={Register} 
-        options={{
-          headerTitle: () => <Header name="MPHR Register"/>,
-          headerStyle:{
-            height: 150,
-            borderBottomLeftRadius:50,
-            borderBottomRightRadius:50,
-            backgroundColor:'#00e4d0',
-            shadowColos: '#000',
-            elevation: 25
-          }
-        }}
-        />
-      </Stack.Navigator>
-    );
-  }
-  return(
-    <Stack.Navigator>
-      <Stack.Screen 
-        name="Dashboard" 
-        component={Dashboard} 
-        options={{
-          headerTitle: () => <Header name="MPHR Dashboard"/>,
-          headerStyle:{
-            height: 150,
-            borderBottomLeftRadius:50,
-            borderBottomRightRadius:50,
-            backgroundColor:'#00e4d0',
-            shadowColos: '#000',
-            elevation: 25
-          }
-        }}
-        />
-    </Stack.Navigator>
-  );
+  container: {
+    flex: 1,
+    alignItems:'center',
+    marginTop:50,
+    padding: 20,
+    borderRadius: 20
+},
+formContainer: {
+  width: '85%',
+  backgroundColor: '#fff',
+  padding: 20,
+  borderRadius: 10,
+  elevation: 5, // Shadow effect
+},
+TextInput: {
+  paddingTop:20,
+  paddingBottom:10,
+  fontSize:20,
+  borderBottomWidth:1,
+  borderBottomColor:'#000',
+  marginBottom:10,
+  textAlign:'center',
+},
+button:{
+    marginTop:50,
+    height:70,
+    width:250,
+    backgroundColor:'#FFAEBC',
+    alignItems:'center',
+    justifyContent: 'center',
+    borderRadius:50,
 }
-
-export default () =>{
-  return (
-    <NavigationContainer>
-      <App />
-    </NavigationContainer>
-  )*/
+})

@@ -16,6 +16,7 @@ import Profile from './src/DoctorScreens/Profile';
 import PacientsList from './src/DoctorScreens/PacientsList';
 import Feedback from './src/DoctorScreens/Feedback';
 import ChatWPacient from './src/DoctorScreens/ChatWPacient';
+import RegisterPage from './src/RegisterPage';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ const App = (props) => {
         <Stack.Screen name="HomePage" component={Homepage}/>
         <Stack.Screen name="Register" component={Register}/>
         <Stack.Screen name="RegisterDoctors" component={RegisterDoctors}/>
+        <Stack.Screen name="RegisterPage" component={RegisterPage}/>
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Dashboard" component={Dashboard}/>
         <Stack.Screen name="Footertabs" component={Footertabs}/>

@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import React, {useState, useEffect} from "react";
 import {database, auth} from '../../config';
 
@@ -55,7 +55,12 @@ const Feedback = ({route}) => {
         placeholder="Sugestie"
         style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 10 }}
       />
-      <Button title="Submit" onPress={handleSubmit} />
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={handleSubmit}
+        >
+            <Text>Adauga</Text>
+        </TouchableOpacity>  
       </View>
       </View>
     );
@@ -76,6 +81,15 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderColor: 'gray',
       borderRadius: 8,
+    },
+    button:{
+        marginTop:30,
+        height:70,
+        width:250,
+        backgroundColor:'#A4E8E0',
+        alignItems:'center',
+        justifyContent: 'center',
+        borderRadius:50,
     }
 
 })
