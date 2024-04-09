@@ -18,7 +18,7 @@ const FirstScreen = () => {
 
     useEffect(() => {
         navigation.setOptions({
-          title: 'Profil', // Change this to the desired title
+          title: 'Profil', 
         });
       }, [navigation]);
 

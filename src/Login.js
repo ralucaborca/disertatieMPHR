@@ -11,7 +11,7 @@ const Login = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: 'Intra in cont', // Change this to the desired title
+      title: 'Intra in cont', 
     });
   }, [navigation]);
 
@@ -98,7 +98,7 @@ formContainer: {
   backgroundColor: '#fff',
   padding: 20,
   borderRadius: 10,
-  elevation: 5, // Shadow effect
+  elevation: 5, 
 },
 TextInput: {
   paddingTop:20,
@@ -122,6 +122,6 @@ image: {
   marginBottom: 30,
   width: 200,
   height: 200,
-  resizeMode: 'contain', // Adjust the image content mode as needed
+  resizeMode: 'contain',
 },
 })

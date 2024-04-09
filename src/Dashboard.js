@@ -1,7 +1,6 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet} from "react-native";
 import React from "react";
-import { auth } from "../config";
-import { NavigationContainer, useNavigation} from '@react-navigation/native';
+import { NavigationContainer} from '@react-navigation/native';
 import Footertabs from "./navigation/Footertabs";
 
 const Dashboard = () => {

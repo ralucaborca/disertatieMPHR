@@ -71,9 +71,9 @@ const styles = StyleSheet.create({
         marginTop:20,
     },
     itemContainer: {
-      marginBottom: 10, // Adjust this value as needed to add spacing between items
+      marginBottom: 10,
       padding: 10,
-      backgroundColor: 'white', // Optional background color
+      backgroundColor: 'white',
       borderWidth: 1,
       borderColor: 'gray',
       borderRadius: 8,

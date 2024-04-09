@@ -1,6 +1,6 @@
 import { View, TextInput, ScrollView, Alert, StyleSheet, TouchableOpacity, Text, KeyboardAvoidingView } from "react-native";
 import React, {useState, useEffect} from "react";
-import { database, firebase } from '../../config';
+import { database } from '../../config';
 import { auth } from "../../config";
 
 const AddScreen = () => {
@@ -148,13 +148,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 10,
-    elevation: 5, // Shadow effect
+    elevation: 5,
     marginLeft: 30
   },
   itemContainer: {
-    marginBottom: 10, // Adjust this value as needed to add spacing between items
+    marginBottom: 10,
     padding: 10,
-    backgroundColor: 'white', // Optional background color
+    backgroundColor: 'white',
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 8,

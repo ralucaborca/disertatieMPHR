@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView, Alert } from "react-native";
 import React, {useState, useEffect} from "react";
 import { useNavigation} from '@react-navigation/native';
-import { auth, firebase, database } from "../config";
+import { auth, database } from "../config";
 
 const Register = () => {
   const navigation = useNavigation();
@@ -14,7 +14,7 @@ const Register = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: 'Intra in cont', // Change this to the desired title
+      title: 'Intra in cont', 
     });
   }, [navigation]);
 
@@ -26,11 +26,9 @@ const Register = () => {
     auth
     .createUserWithEmailAndPassword(email, password)
     .then(userCredentials => {
-      // Update user profile with name
       userCredentials.user.updateProfile({
-        displayName: name + ' ' + prenume // Assuming you want to combine name and prenume
+        displayName: name + ' ' + prenume 
       }).then(() => {
-        // Save additional user data to database
         database.ref().child('Pacienti/' + userCredentials.user.uid).set({
           name: name,
           prenume: prenume,
@@ -128,7 +126,7 @@ formContainer: {
   backgroundColor: '#fff',
   padding: 20,
   borderRadius: 10,
-  elevation: 5, // Shadow effect
+  elevation: 5, 
 },
 TextInput: {
     paddingTop:20,

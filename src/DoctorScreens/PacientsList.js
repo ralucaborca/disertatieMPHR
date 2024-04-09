@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, FlatList, TouchableOpacity } from "react-native";
 import React, {useState, useEffect} from "react";
-import {database, auth } from '../../config';
+import {database } from '../../config';
 import {useNavigation} from '@react-navigation/native';
 
 const PacientsList  = () => {
@@ -27,16 +27,14 @@ const PacientsList  = () => {
         fetchData();
 
         navigation.setOptions({
-          title: 'Lista pacientilor', // Change this to the desired title
+          title: 'Lista pacientilor',
         });
 
         return () => {
-          // Cleanup function if needed
         };
       }, [navigation]);
 
       const handleItemClick = (item) => {
-        // Handle item click, e.g., navigate to a details screen
         navigation.navigate('Feedback', { item });
       };
 
@@ -75,14 +73,12 @@ const styles = StyleSheet.create({
         marginTop:20,
     },
     itemContainer: {
-      marginBottom: 10, // Adjust this value as needed to add spacing between items
+      marginBottom: 10,
       padding: 10,
-      backgroundColor: 'white', // Optional background color
       borderWidth: 1,
       borderColor: 'gray',
       borderRadius: 8,
       width: '100%',
       backgroundColor: '#A9EAFE'
-    }
-
+    },
 })

@@ -1,16 +1,13 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image} from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { withNavigation } from "react-navigation";
-import Register from "./Register";
-import RegisterDoctors from "./RegisterDoctors";
 
 function RegisterPage () {
     const navigation = useNavigation();
 
     useEffect(() => {
         navigation.setOptions({
-          title: 'Inregistrare noua', // Change this to the desired title
+          title: 'Inregistrare noua', 
         });
       }, [navigation]);
     
@@ -70,6 +67,6 @@ const styles = StyleSheet.create({
     image: {
         width: 200,
         height: 200,
-        resizeMode: 'contain', // Adjust the image content mode as needed
+        resizeMode: 'contain',
     },
   })
