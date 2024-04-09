@@ -1,4 +1,4 @@
-import { View, TextInput, Button, Alert, StyleSheet, TouchableOpacity, Text, KeyboardAvoidingView } from "react-native";
+import { View, TextInput, ScrollView, Alert, StyleSheet, TouchableOpacity, Text, KeyboardAvoidingView } from "react-native";
 import React, {useState, useEffect} from "react";
 import { database, firebase } from '../../config';
 import { auth } from "../../config";
@@ -59,8 +59,9 @@ const AddScreen = () => {
     };
   
     return (
-      <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.container}>
+      <KeyboardAvoidingView >
+        <ScrollView>
+      <View style={styles.formContainer}>
         <TextInput
           style={styles.TextInput}
           placeholder="Sex"
@@ -103,9 +104,16 @@ const AddScreen = () => {
           value={practicSport}
           onChangeText={(text) => setPracticSport(text)}
         />
-
-        <Button title="Save" onPress={handleSaveData} />
+        <TouchableOpacity
+                onPress={handleSaveData}
+                style={styles.button}
+            >
+                <Text style={{fontWeight:'bold', fontSize:16}}>
+                    Salveaza
+                    </Text>
+            </TouchableOpacity>
       </View>
+      </ScrollView>
       </KeyboardAvoidingView>
     );
   };
@@ -121,7 +129,6 @@ const styles = StyleSheet.create({
   TextInput: {
       paddingTop:20,
       paddingBottom:10,
-      width:400,
       fontSize:20,
       borderBottomWidth:1,
       borderBottomColor:'#000',
@@ -129,12 +136,29 @@ const styles = StyleSheet.create({
       textAlign:'center',
   },
   button:{
-      marginTop:50,
+      marginTop:30,
       height:70,
-      width:250,
       backgroundColor:'#A4E8E0',
       alignItems:'center',
       justifyContent: 'center',
       borderRadius:50,
+  },
+  formContainer: {
+    width: '85%',
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    elevation: 5, // Shadow effect
+    marginLeft: 30
+  },
+  itemContainer: {
+    marginBottom: 10, // Adjust this value as needed to add spacing between items
+    padding: 10,
+    backgroundColor: 'white', // Optional background color
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 8,
+    width: '100%',
+    backgroundColor: '#A9EAFE'
   }
 })

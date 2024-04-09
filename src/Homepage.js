@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Button} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image} from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { withNavigation } from "react-navigation";
@@ -10,18 +10,22 @@ function Homepage() {
 
     useEffect(() => {
         navigation.setOptions({
-          title: 'Prima pagina', // Change this to the desired title
+          title: 'Aplicatia inimii', // Change this to the desired title
         });
       }, [navigation]);
 
     return (
       <View style={styles.container}>
+        <Image 
+        source={require('../assets/doctor.png')}
+        style={styles.image}
+        />
         <TouchableOpacity
                 onPress={() => navigation.navigate('Login')}
                 style={styles.button}
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Login
+                    Intra in cont
                     </Text>
             </TouchableOpacity>
         <TouchableOpacity
@@ -29,7 +33,7 @@ function Homepage() {
                 style={styles.button}
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Register
+                    Inregistreaza-te
                     </Text>
             </TouchableOpacity>
       </View>
@@ -62,5 +66,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent: 'center',
         borderRadius:50,
-    }
+    },
+    image: {
+      width: 300,
+      height: 300,
+      resizeMode: 'contain', // Adjust the image content mode as needed
+  },
   })

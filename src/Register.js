@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView, Alert } from "react-native";
 import React, {useState, useEffect} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { auth, firebase, database } from "../config";
@@ -14,7 +14,7 @@ const Register = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: 'Register Pacient', // Change this to the desired title
+      title: 'Intra in cont', // Change this to the desired title
     });
   }, [navigation]);
 
@@ -26,19 +26,26 @@ const Register = () => {
     auth
     .createUserWithEmailAndPassword(email, password)
     .then(userCredentials => {
-      database.ref().child('Pacienti/' + userCredentials.user.uid).set({
-        name: name,
-        prenume: prenume,
-        email: email
+      // Update user profile with name
+      userCredentials.user.updateProfile({
+        displayName: name + ' ' + prenume // Assuming you want to combine name and prenume
       }).then(() => {
-        console.log("User data added to Firebase Realtime Database");
+        // Save additional user data to database
+        database.ref().child('Pacienti/' + userCredentials.user.uid).set({
+          name: name,
+          prenume: prenume,
+          email: email
+        }).then(() => {
+          Alert.alert('Success', `Inregistrarea dumneavoastra a avut loc cu success, ${name} ${prenume}!`);
+        }).catch(error => {
+          console.error("Error adding user data to Firebase Realtime Database:", error);
+        });
       }).catch(error => {
-        console.error("Error adding user data to Firebase Realtime Database:", error);
+        console.error("Error updating user profile:", error);
       });
-     
     })
     .catch(error => alert(error.message))
-  }
+}
 
   return(
     <KeyboardAvoidingView style={styles.container}>
@@ -90,7 +97,7 @@ const Register = () => {
                 style={styles.button}
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Register
+                    Inregistreaza-te
                     </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -135,7 +142,6 @@ TextInput: {
 button:{
     marginTop:50,
     height:70,
-    width:250,
     backgroundColor:'#A4E8E0',
     alignItems:'center',
     justifyContent: 'center',

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView, Alert } from "react-native";
 import React, {useState, useEffect} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { auth, firebase, database } from "../config";
@@ -15,7 +15,7 @@ const RegisterDoctors = () => {
   
   useEffect(() => {
     navigation.setOptions({
-      title: 'Register Doctor', // Change this to the desired title
+      title: 'Intra in cont', // Change this to the desired title
     });
   }, [navigation]);
 
@@ -27,19 +27,28 @@ const RegisterDoctors = () => {
     auth
     .createUserWithEmailAndPassword(email, password)
     .then(userCredentials => {
-      database.ref().child('Doctori/' + userCredentials.user.uid).set({
-        name: name,
-        prenume: prenume,
-        email: email,
-        adresaCabinet: adresaCabinet
+      // Update user profile with name
+      const fullName = `${name} ${prenume}`;
+      userCredentials.user.updateProfile({
+        displayName: fullName
       }).then(() => {
-        console.log("User data added to Firebase Realtime Database");
+        // Save additional user data to database
+        database.ref().child('Doctori/' + userCredentials.user.uid).set({
+          name: name,
+          prenume: prenume,
+          email: email,
+          adresaCabinet: adresaCabinet
+        }).then(() => {
+          Alert.alert('Success', `Inregistrarea dumneavoastra a avut loc cu success, ${fullName}!`);
+        }).catch(error => {
+          console.error("Error adding user data to Firebase Realtime Database:", error);
+        });
       }).catch(error => {
-        console.error("Error adding user data to Firebase Realtime Database:", error);
+        console.error("Error updating user profile:", error);
       });
     })
     .catch(error => alert(error.message))
-  }
+}
 
   return(
     <KeyboardAvoidingView style={styles.container}>
@@ -99,7 +108,7 @@ const RegisterDoctors = () => {
                 style={styles.button}
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Register
+                Inregistreaza-te
                     </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -145,7 +154,6 @@ const styles = StyleSheet.create({
     button:{
         marginTop:50,
         height:70,
-        width:250,
         backgroundColor:'#A4E8E0',
         alignItems:'center',
         justifyContent: 'center',

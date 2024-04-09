@@ -1,13 +1,12 @@
 
-import React from "react";
+import React , {useEffect} from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { auth } from "../../config";
-import { NavigationContainer, useNavigation} from '@react-navigation/native';
-import Footertabs from "../navigation/Footertabs";
-import Login from "../Login"
+import { useNavigation} from '@react-navigation/native';
 
-const FirstScreen = ({navigation}) => {
-    
+const FirstScreen = () => {
+    const navigation = useNavigation();
+
     const handlerSignOut = () => {
      auth
      .signOut()
@@ -17,10 +16,17 @@ const FirstScreen = ({navigation}) => {
      .catch(error => alert(error.message));
     }
 
+    useEffect(() => {
+        navigation.setOptions({
+          title: 'Profil', // Change this to the desired title
+        });
+      }, [navigation]);
+
 
      return (
         <View style={styles.container}>
-        <Text> Email: {auth.currentUser?.email}</Text>
+        <Text style={styles.textDisplay}> Email: {auth.currentUser?.email}</Text>
+        <Text style={styles.textDisplay}> Nume: {auth.currentUser?.displayName}</Text>
         <TouchableOpacity 
         style={styles.button}
         onPress={handlerSignOut}
@@ -48,6 +54,9 @@ const styles = StyleSheet.create({
         borderBottomColor:'#000',
         marginBottom:10,
         textAlign:'center',
+    },
+    textDisplay:{
+        fontSize:20
     },
     button:{
         marginTop:50,

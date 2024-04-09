@@ -10,7 +10,7 @@ function RegisterPage () {
 
     useEffect(() => {
         navigation.setOptions({
-          title: 'Register', // Change this to the desired title
+          title: 'Inregistrare noua', // Change this to the desired title
         });
       }, [navigation]);
     
@@ -25,7 +25,7 @@ function RegisterPage () {
                 style={styles.button}
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Register Pacient
+                    Inregistrare Pacient
                     </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -33,7 +33,7 @@ function RegisterPage () {
                 style={styles.button}
             >
                 <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Register Doctor
+                    Inregistrare Doctor
                     </Text>
             </TouchableOpacity>
       </View>

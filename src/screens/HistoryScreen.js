@@ -52,7 +52,7 @@ const HistoryScreen = () => {
       
     );
     return (
-      <View>
+      <View style={styles.container}>
         <FlatList
           data={data}
           renderItem={renderItem}
@@ -77,6 +77,6 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderColor: 'gray',
       borderRadius: 8,
-    }
-
+      backgroundColor: '#FBE698'
+    },
 })

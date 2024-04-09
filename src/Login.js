@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView, Image } from "react-native";
 import React, {useEffect, useState} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { auth, database } from "../config";
@@ -8,6 +8,12 @@ const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: 'Intra in cont', // Change this to the desired title
+    });
+  }, [navigation]);
 
   const handleLogIn = () => {
     auth
@@ -33,6 +39,10 @@ const Login = () => {
 
   return(
     <KeyboardAvoidingView style={styles.container}>
+      <Image 
+        source={require('../assets/logo.png')}
+        style={styles.image}
+        />
       <View style={styles.formContainer}>
       <TextInput 
                     style={styles.TextInput}
@@ -56,7 +66,7 @@ const Login = () => {
                 style={styles.button}
             >
                 <Text style={{fontWeight:'bold', fontSize:22}}>
-                    Login
+                    Intra in cont
                     </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -84,7 +94,7 @@ const styles = StyleSheet.create({
     borderRadius: 20
 },
 formContainer: {
-  width: '85%',
+  width: '90%',
   backgroundColor: '#fff',
   padding: 20,
   borderRadius: 10,
@@ -102,10 +112,16 @@ TextInput: {
 button:{
     marginTop:50,
     height:70,
-    width:250,
     backgroundColor:'#FFAEBC',
     alignItems:'center',
     justifyContent: 'center',
     borderRadius:50,
-}
+},
+image: {
+  marginTop: -50,
+  marginBottom: 30,
+  width: 200,
+  height: 200,
+  resizeMode: 'contain', // Adjust the image content mode as needed
+},
 })

@@ -46,7 +46,7 @@ const Screen = () => {
         
       );
       return (
-        <View>
+        <View style={styles.container}>
           <FlatList
             data={data}
             renderItem={renderItem}
@@ -65,12 +65,11 @@ const styles = StyleSheet.create({
         marginTop:20,
     },
     itemContainer: {
-      marginBottom: 10, // Adjust this value as needed to add spacing between items
-      padding: 10,
-      backgroundColor: 'white', // Optional background color
+      marginBottom: 10, 
+      padding: 10, 
       borderWidth: 1,
       borderColor: 'gray',
       borderRadius: 8,
-    }
-
+      backgroundColor: '#A9EAFE'
+    },
 })

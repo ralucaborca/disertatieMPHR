@@ -8,7 +8,7 @@ const Profile = () => {
     return (
         <View style={styles.container}>
             <Text> Email: {auth.currentUser?.email}</Text>
-            
+            <Text> Nume: {auth.currentUser?.displayName}</Text>
         </View>
     )
 }

@@ -25,11 +25,15 @@ const PacientsList  = () => {
         };
     
         fetchData();
-    
+
+        navigation.setOptions({
+          title: 'Lista pacientilor', // Change this to the desired title
+        });
+
         return () => {
           // Cleanup function if needed
         };
-      }, []);
+      }, [navigation]);
 
       const handleItemClick = (item) => {
         // Handle item click, e.g., navigate to a details screen
@@ -77,6 +81,8 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderColor: 'gray',
       borderRadius: 8,
+      width: '100%',
+      backgroundColor: '#A9EAFE'
     }
 
 })
