@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import AddScreen from "../screens/AddScreen";
-import ChatScreen from "../screens/ChatScreen";
-import HistoryScreen from "../screens/HistoryScreen";
-import FirstScreen from "../screens/FirstScreen";
 import { useNavigation, useRoute } from '@react-navigation/native';
+import FirstScreen from "./FirstScreen";
+import AddScreen from "./AddScreen";
+import ChatScreen from "./ChatScreen";
+import HistoryScreen from "./HistoryScreen";
+import FeedbackScreen from "./FeedbackScreen";
 
 const Tab = createBottomTabNavigator();
 
-const Footertabs = () =>{
+const PacientNavigator = () => {
     const route = useRoute();
     const navigation = useNavigation();
 
@@ -21,7 +22,7 @@ const Footertabs = () =>{
 
     return (
         <Tab.Navigator
-            initialRouteName="Profile"
+            initialRouteName="FirstScreen"
             screenOptions={{ headerShown: true }}
         >
             <Tab.Screen
@@ -35,12 +36,12 @@ const Footertabs = () =>{
                 }}
             />
             <Tab.Screen
-                name="Add"
+                name="Adauga"
                 component={AddScreen}
                 options={{
-                    tabBarLabel: 'List',
+                    tabBarLabel: 'Adauga',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account" color={color} size={size} />
+                        <MaterialCommunityIcons name="plus-circle" color={color} size={size} />
                     ),
                 }}
             />
@@ -57,18 +58,27 @@ const Footertabs = () =>{
                 })}
             />
             <Tab.Screen
-                name="History"
+                name="Istoric"
                 component={HistoryScreen}
                 options={{
-                    tabBarLabel: 'List',
+                    tabBarLabel: 'Istoric',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="format-list-bulleted" color={color} size={size} />
+                        <MaterialCommunityIcons name="history" color={color} size={size} />
                     ),
                 }}
             />
-          
+            <Tab.Screen
+                name="Sugestii"
+                component={FeedbackScreen}
+                options={{
+                    tabBarLabel: 'Sugestii',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="comment" color={color} size={size} />
+                    ),
+                }}
+            />
         </Tab.Navigator>
     );
 }
 
-export default Footertabs;
+export default PacientNavigator;

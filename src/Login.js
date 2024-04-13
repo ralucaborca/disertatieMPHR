@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { auth, database } from "../config";
 
-
 const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
@@ -25,14 +24,16 @@ const Login = () => {
         database.ref('Doctori/' + user.uid).once('value').then(snapshot => {
           if (snapshot.exists()) {
             // User is a doctor
-            navigation.navigate('PacientsList');
+            navigation.navigate('DoctorNavigator');
           } else {
             // User is a patient
-            navigation.navigate('Dashboard');
+            navigation.navigate('PacientNavigator');
           }
         }).catch(error => {
           console.error("Error checking user type:", error);
         });
+        
+        setPassword('');
       })
       .catch(error => alert(error.message))
   }

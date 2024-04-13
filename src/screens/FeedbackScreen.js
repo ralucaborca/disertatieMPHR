@@ -1,12 +1,20 @@
 import { StyleSheet, View, Text, FlatList  } from "react-native";
 import React, {useState, useEffect} from "react";
 import {database, auth } from '../../config';
+import { useNavigation} from '@react-navigation/native';
 
 
-const Screen = () => {
+const FeedbackScreen = () => {
+    const navigation = useNavigation();
     const [data, setData] = useState([]);
     const [userq, setUserQ] = useState(null);
     
+    useEffect(() => {
+      navigation.setOptions({
+        title: 'Sugestii medic', 
+      });
+    }, [navigation]);
+
     const fetchData = async (user) => {
         try {
           const snapshot = await database.ref('Sugestii medic').orderByChild('userId').equalTo(user).once('value');
@@ -56,7 +64,7 @@ const Screen = () => {
       );
 }
 
-export default Screen;
+export default FeedbackScreen;
 
 const styles = StyleSheet.create({
     container: {

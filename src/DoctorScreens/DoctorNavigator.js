@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import AddScreen from "../screens/AddScreen";
-import ChatScreen from "../screens/ChatScreen";
-import HistoryScreen from "../screens/HistoryScreen";
-import FirstScreen from "../screens/FirstScreen";
+import ChatWPacient from "./ChatWPacient";
+import PacientsList from "./PacientsList";
+import Profile from "./Profile";
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
-const Footertabs = () =>{
+const DoctorNavigator = () => {
     const route = useRoute();
     const navigation = useNavigation();
 
@@ -26,7 +25,7 @@ const Footertabs = () =>{
         >
             <Tab.Screen
                 name="Profile"
-                component={FirstScreen}
+                component={Profile}
                 options={{
                     tabBarLabel: 'Profile',
                     tabBarIcon: ({ color, size }) => (
@@ -35,18 +34,8 @@ const Footertabs = () =>{
                 }}
             />
             <Tab.Screen
-                name="Add"
-                component={AddScreen}
-                options={{
-                    tabBarLabel: 'List',
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account" color={color} size={size} />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Chat"
-                component={ChatScreen}
+                name="ChatWPacient"
+                component={ChatWPacient}
                 options={({ route }) => ({
                     tabBarLabel: 'Chat',
                     tabBarIcon: ({ color, size }) => (
@@ -57,8 +46,8 @@ const Footertabs = () =>{
                 })}
             />
             <Tab.Screen
-                name="History"
-                component={HistoryScreen}
+                name="PacientsList"
+                component={PacientsList}
                 options={{
                     tabBarLabel: 'List',
                     tabBarIcon: ({ color, size }) => (
@@ -66,9 +55,8 @@ const Footertabs = () =>{
                     ),
                 }}
             />
-          
         </Tab.Navigator>
     );
 }
 
-export default Footertabs;
+export default DoctorNavigator;

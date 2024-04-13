@@ -4,17 +4,18 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { auth } from "../../config";
 import { useNavigation} from '@react-navigation/native';
 
+
 const FirstScreen = () => {
     const navigation = useNavigation();
 
-    const handlerSignOut = () => {
-     auth
-     .signOut()
-     .then(() => {
-         navigation.navigate('Login');
-     })
-     .catch(error => alert(error.message));
-    }
+    const handleSignOut = async () => {
+        try {
+          await auth.signOut();
+          navigation.navigate('Login');
+        } catch (error) {
+          console.error('Error signing out:', error);
+        }
+      };
 
     useEffect(() => {
         navigation.setOptions({
@@ -29,7 +30,7 @@ const FirstScreen = () => {
         <Text style={styles.textDisplay}> Nume: {auth.currentUser?.displayName}</Text>
         <TouchableOpacity 
         style={styles.button}
-        onPress={handlerSignOut}
+        onPress={handleSignOut}
         >
             <Text>Sign Out</Text>
         </TouchableOpacity>     

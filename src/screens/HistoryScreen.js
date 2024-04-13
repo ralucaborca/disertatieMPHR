@@ -1,10 +1,18 @@
 import { StyleSheet, View, Text, FlatList  } from "react-native";
 import React, {useState, useEffect} from "react";
 import {database, auth } from '../../config';
+import { useNavigation } from '@react-navigation/native';
 
 const HistoryScreen = () => {
+    const navigation = useNavigation();
     const [data, setData] = useState([]);
     const [userq, setUserQ] = useState(null);
+
+    useEffect(() => {
+      navigation.setOptions({
+        title: 'Istoric personal', 
+      });
+    }, [navigation]);
 
   
     const fetchData = async (user) => {
