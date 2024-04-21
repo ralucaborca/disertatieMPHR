@@ -22,14 +22,14 @@ const PacientNavigator = () => {
 
     return (
         <Tab.Navigator
-            initialRouteName="FirstScreen"
+            initialRouteName="Sugestii"
             screenOptions={{ headerShown: true }}
         >
             <Tab.Screen
-                name="Profile"
+                name="Profil"
                 component={FirstScreen}
                 options={{
-                    tabBarLabel: 'Profile',
+                    tabBarLabel: 'Profil',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="account" color={color} size={size} />
                     ),

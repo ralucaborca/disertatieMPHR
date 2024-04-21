@@ -20,7 +20,7 @@ const DoctorNavigator = () => {
 
     return (
         <Tab.Navigator
-            initialRouteName="Profile"
+            initialRouteName="PacientsList"
             screenOptions={{ headerShown: true }}
         >
             <Tab.Screen

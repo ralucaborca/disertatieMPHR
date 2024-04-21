@@ -1,15 +1,14 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
 import React from "react";
-import { auth} from "../../config";
+import { auth, } from "../../config";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation, useRoute } from '@react-navigation/native';
-
 
 const Tab = createBottomTabNavigator();
 
 const Profile = () => {
     const navigation = useNavigation();
-
+    
     const handleSignOut = async () => {
         try {
           await auth.signOut();
@@ -21,8 +20,8 @@ const Profile = () => {
 
     return (
         <View style={styles.container}>
+        <Text style={styles.nameDisplay}> Nume: {auth.currentUser?.displayName}</Text>
         <Text style={styles.textDisplay}> Email: {auth.currentUser?.email}</Text>
-        <Text style={styles.textDisplay}> Nume: {auth.currentUser?.displayName}</Text>
         <TouchableOpacity 
         style={styles.button}
         onPress={handleSignOut}
@@ -52,8 +51,12 @@ const styles = StyleSheet.create({
         textAlign:'center',
     },
     textDisplay:{
-        fontSize:20
+        fontSize:25
     },
+    nameDisplay:{
+        fontSize:30,
+        marginTop: 50
+      },
     button:{
         marginTop:50,
         height:70,
@@ -62,6 +65,19 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent: 'center',
         borderRadius:50,
+    },
+    imageContainer: {
+        width: 150,
+        height: 150,
+        backgroundColor: '#eee',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 75,
+        marginBottom: 20,
+    },
+    image: {
+        width: 150,
+        height: 150,
+        borderRadius: 75,
     }
-
 })

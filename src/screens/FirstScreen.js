@@ -1,6 +1,6 @@
 
 import React , {useEffect} from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import { auth } from "../../config";
 import { useNavigation} from '@react-navigation/native';
 
@@ -26,8 +26,8 @@ const FirstScreen = () => {
 
      return (
         <View style={styles.container}>
+        <Text style={styles.nameDisplay}> Nume: {auth.currentUser?.displayName}</Text>
         <Text style={styles.textDisplay}> Email: {auth.currentUser?.email}</Text>
-        <Text style={styles.textDisplay}> Nume: {auth.currentUser?.displayName}</Text>
         <TouchableOpacity 
         style={styles.button}
         onPress={handleSignOut}
@@ -57,7 +57,11 @@ const styles = StyleSheet.create({
         textAlign:'center',
     },
     textDisplay:{
-        fontSize:20
+        fontSize:25
+    },
+    nameDisplay:{
+      fontSize:30,
+      marginTop: 50
     },
     button:{
         marginTop:50,
