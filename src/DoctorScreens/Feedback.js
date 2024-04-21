@@ -22,8 +22,11 @@ const Feedback = ({route}) => {
 
     const handleSubmit = async () => {
         try {
+          const currentUser = auth.currentUser;
+          const currentUserDisplayName = currentUser.displayName;
           database.ref().child('Sugestii medic').push({
             userId: item.user,
+            userName: currentUserDisplayName,
             user: user.uid,
             stareSanatate: stareSanatate,
             sugestie: sugestie,

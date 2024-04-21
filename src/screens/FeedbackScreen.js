@@ -48,6 +48,7 @@ const FeedbackScreen = () => {
   
       const renderItem = ({ item }) => (
         <View  style={styles.itemContainer}>
+           {item.userName && <Text>Nume doctor: {item.userName}</Text>}
           <Text>Stare de sanatate: {item.stareSanatate}</Text>
           <Text>Sugestie: {item.sugestie}</Text>
         </View>

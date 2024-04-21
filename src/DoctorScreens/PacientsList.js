@@ -41,6 +41,7 @@ const PacientsList  = () => {
     const renderItem = ({ item }) => (
         <TouchableOpacity onPress={() => handleItemClick(item)}>
         <View style={styles.itemContainer}>
+        {item.userName && <Text>Nume pacient: {item.userName}</Text>}
           <Text>Data adaugarii: {item.dateAdded}</Text>
           <Text>Fumator: {item.fumator}</Text>
           <Text>Greutate: {item.greutate}</Text>

@@ -27,10 +27,15 @@ const AddScreen = () => {
   
     const handleSaveData = () => {
         if (user && sex && varsta && inaltime && greutate && afectiune && fumator && practicSport) {
+
+          const currentUser = auth.currentUser;
+          const currentUserDisplayName = currentUser.displayName;
+
           const currentDate = new Date();
            const formattedDate = formatDateTime(currentDate);
             database.ref().child('Date pacient').push({
               user: user.uid,
+              userName: currentUserDisplayName,
               sex: sex,
               varsta: varsta,
               inaltime: inaltime,
