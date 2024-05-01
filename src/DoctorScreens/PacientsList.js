@@ -1,68 +1,38 @@
 import { StyleSheet, View, Text, FlatList, TouchableOpacity } from "react-native";
 import React, {useState, useEffect} from "react";
-import {database } from '../../config';
 import {useNavigation} from '@react-navigation/native';
 
-const PacientsList  = () => {
-    const [data, setData] = useState([]);
+const PacientsList  = ({route}) => {
+    const { person } = route.params;
     const navigation = useNavigation();
-  
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const snapshot = await database.ref('Date pacient').once('value');
-            const dataArr = [];
-            snapshot.forEach((childSnapshot) => {
-              dataArr.push({
-                id: childSnapshot.key,
-                ...childSnapshot.val(),
-              });
-            });
-            setData(dataArr);
-          } catch (error) {
-            console.log('Error fetching data: ', error);
-          }
-        };
-    
-        fetchData();
 
-        navigation.setOptions({
-          title: 'Lista pacientilor',
-        });
+    navigation.setOptions({
+      title: 'Datele pacientului',
+    });
 
-        return () => {
-        };
-      }, [navigation]);
+    const handleFeedbackClick = () => {
+      navigation.navigate('Feedback', { person });
+    };
 
-      const handleItemClick = (item) => {
-        navigation.navigate('Feedback', { item });
-      };
 
-    const renderItem = ({ item }) => (
-        <TouchableOpacity onPress={() => handleItemClick(item)}>
-        <View style={styles.itemContainer}>
-        {item.userName && <Text>Nume pacient: {item.userName}</Text>}
-          <Text>Data adaugarii: {item.dateAdded}</Text>
-          <Text>Fumator: {item.fumator}</Text>
-          <Text>Greutate: {item.greutate}</Text>
-          <Text>Afectiune: {item.afectiune}</Text>
-          <Text>Inaltime: {item.inaltime}</Text>
-          <Text>Pacientul practica sport: {item.practicSport}</Text>
-          <Text>Sex: {item.sex}</Text>
-          <Text>Varsta: {item.varsta}</Text>
-        </View>
-      </TouchableOpacity>
-      
-    );
     return (
       <View style={styles.container}>
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-        />
-      </View>
+        <TouchableOpacity onPress={handleFeedbackClick}>
+        <View style={styles.itemContainer}>
+            <Text>Nume pacient: {person.userName}</Text>
+            <Text>Data adaugarii: {person.dateAdded}</Text>
+            <Text>Fumator: {person.fumator}</Text>
+            <Text>Greutate: {person.greutate}</Text>
+            <Text>Afectiune: {person.afectiune}</Text>
+            <Text>Inaltime: {person.inaltime}</Text>
+            <Text>Pacientul practica sport: {person.practicSport}</Text>
+            <Text>Sex: {person.sex}</Text>
+            <Text>Varsta: {person.varsta}</Text>
+        </View>
+        </TouchableOpacity>
+      </View> 
     );
+
 }
 
 export default PacientsList;
@@ -72,6 +42,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems:'center',
         marginTop:20,
+        marginLeft:30,
+        marginRight:30
     },
     itemContainer: {
       marginBottom: 10,

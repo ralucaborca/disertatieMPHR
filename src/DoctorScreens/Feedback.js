@@ -3,77 +3,82 @@ import React, {useState, useEffect} from "react";
 import {database, auth} from '../../config';
 import { useNavigation} from '@react-navigation/native';
 
-const Feedback = ({route}) => {
-    const { item } = route.params;
-    const [stareSanatate, setStareSanatate] = useState('');
-    const [sugestie, setSugestie] = useState('');
-    const [user, setUser] = useState('');
-    const navigation = useNavigation();
+const Feedback = ({ route }) => {
+  const { person } = route.params;
+  const [stareSanatate, setStareSanatate] = useState('');
+  const [sugestie, setSugestie] = useState('');
+  const [user, setUser] = useState(null); // Changed to null to avoid potential issues
+  const navigation = useNavigation();
 
-    useEffect(() => {
-        const subscriber = auth.onAuthStateChanged(user => {
+  useEffect(() => {
+      const subscriber = auth.onAuthStateChanged(user => {
           setUser(user);
-        });
-        navigation.setOptions({
+      });
+      navigation.setOptions({
           title: 'Sugestii',
-        });
-        return subscriber;
-      }, [navigation]);
+      });
+      return subscriber;
+  }, [navigation]);
 
-    const handleSubmit = async () => {
-        try {
+  const handleSubmit = async () => {
+      try {
+          if (!user) {
+              console.error('User not authenticated.');
+              return;
+          }
+
           const currentUser = auth.currentUser;
           const currentUserDisplayName = currentUser.displayName;
-          database.ref().child('Sugestii medic').push({
-            userId: item.user,
-            userName: currentUserDisplayName,
-            user: user.uid,
-            stareSanatate: stareSanatate,
-            sugestie: sugestie,
-            
+          await database.ref('Sugestii medic').push({
+              userId: currentUser.uid, // Changed to use current user ID
+              userName: currentUserDisplayName,
+              stareSanatate: stareSanatate,
+              sugestie: sugestie,
+              user: user.uid, // Assuming item.id is the ID of the patient
           });
-         console.log(item.user);
+          // Clear input fields after submission
           setStareSanatate('');
           setSugestie('');
-        } catch (error) {
+      } catch (error) {
           console.error('Error submitting data:', error);
-        }
-      };
+      }
+  };
 
-    return (
-        <View style={styles.container}>
-      <View style={styles.itemContainer}>
-        <Text>Data adaugarii: {item.dateAdded}</Text>
-          <Text>Fumator: {item.fumator}</Text>
-          <Text>Greutate: {item.greutate}</Text>
-          <Text>Afectiune: {item.afectiune}</Text>
-          <Text>Inaltime: {item.inaltime}</Text>
-          <Text>Pacientul practica sport: {item.practicSport}</Text>
-          <Text>Sex: {item.sex}</Text>
-          <Text>Varsta: {item.varsta}</Text>
-          <Text style={{marginTop: 70}}>Introduceti starea actuala de sanatate a pacientului:</Text>
-          <TextInput
-        value={stareSanatate}
-        onChangeText={setStareSanatate}
-        placeholder="Stare actuala de sanatate"
-        style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 10, marginTop: 10 }}
-      />
-      <Text style={{marginTop: 20}}>Introduceti o sugestie pacientului:</Text>
-      <TextInput
-        value={sugestie}
-        onChangeText={setSugestie}
-        placeholder="Sugestie"
-        style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 10, marginTop: 10 }}
-      />
-      <TouchableOpacity 
-        style={styles.button}
-        onPress={handleSubmit}
-        >
-            <Text>Adauga</Text>
-        </TouchableOpacity>  
+  return (
+      <View style={styles.container}>
+          <View style={styles.itemContainer}>
+              <Text>Nume pacient: {person.userName}</Text>
+              <Text>Data adaugarii: {person.dateAdded}</Text>
+              <Text>Fumator: {person.fumator}</Text>
+              <Text>Greutate: {person.greutate}</Text>
+              <Text>Afectiune: {person.afectiune}</Text>
+              <Text>Inaltime: {person.inaltime}</Text>
+              <Text>Pacientul practica sport: {person.practicSport}</Text>
+              <Text>Sex: {person.sex}</Text>
+              <Text>Varsta: {person.varsta}</Text>
+              <Text style={{ marginTop: 70 }}>Introduceti starea actuala de sanatate a pacientului:</Text>
+              <TextInput
+                  value={stareSanatate}
+                  onChangeText={setStareSanatate}
+                  placeholder="Stare actuala de sanatate"
+                  style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 10, marginTop: 10 }}
+              />
+              <Text style={{ marginTop: 20 }}>Introduceti o sugestie pacientului:</Text>
+              <TextInput
+                  value={sugestie}
+                  onChangeText={setSugestie}
+                  placeholder="Sugestie"
+                  style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 10, marginTop: 10 }}
+              />
+              <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleSubmit}
+              >
+                  <Text>Adauga</Text>
+              </TouchableOpacity>
+          </View>
       </View>
-      </View>
-    );
+  );
 }
 
 export default Feedback;

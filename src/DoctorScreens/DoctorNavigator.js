@@ -5,6 +5,7 @@ import ChatWPacient from "./ChatWPacient";
 import PacientsList from "./PacientsList";
 import Profile from "./Profile";
 import { useNavigation, useRoute } from '@react-navigation/native';
+import NamesList from "./NamesList";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +21,7 @@ const DoctorNavigator = () => {
 
     return (
         <Tab.Navigator
-            initialRouteName="PacientsList"
+            initialRouteName="NamesList"
             screenOptions={{ headerShown: true }}
         >
             <Tab.Screen
@@ -46,8 +47,8 @@ const DoctorNavigator = () => {
                 })}
             />
             <Tab.Screen
-                name="PacientsList"
-                component={PacientsList}
+                name="NamesList"
+                component={NamesList}
                 options={{
                     tabBarLabel: 'List',
                     tabBarIcon: ({ color, size }) => (
