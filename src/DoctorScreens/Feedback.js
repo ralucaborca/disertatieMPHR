@@ -21,6 +21,15 @@ const Feedback = ({ route }) => {
   }, [navigation]);
 
   const handleSubmit = async () => {
+
+    if (!stareSanatate) {
+        Alert.alert('Error', 'Completati campul stare de sanatate.');
+        return;
+    }
+    if (!sugestie) {
+        Alert.alert('Error', 'Completati campul sugestie.');
+        return;
+    }
       try {
           const currentUser = auth.currentUser;
           const currentUserDisplayName = currentUser.displayName;

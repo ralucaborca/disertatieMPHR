@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView, Image } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView, Image, Alert } from "react-native";
 import React, {useEffect, useState} from "react";
 import { useNavigation} from '@react-navigation/native';
 import { auth, database } from "../config";
@@ -15,6 +15,21 @@ const Login = () => {
   }, [navigation]);
 
   const handleLogIn = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      Alert.alert('Error', 'Completati campul email.');
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      Alert.alert('Error', 'Introduceti o adesa de email valida.');
+      return;
+    }
+
+    if (!password) {
+      Alert.alert('Error', 'Completati campul parola.');
+      return;
+    }
+
     auth
       .signInWithEmailAndPassword(email, password)
       .then(userCredentials => {
@@ -32,6 +47,7 @@ const Login = () => {
         }).catch(error => {
           console.error("Error checking user type:", error);
         });
+        
         
         setPassword('');
       })

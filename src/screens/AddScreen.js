@@ -26,8 +26,41 @@ const AddScreen = () => {
     };
   
     const handleSaveData = () => {
+          if (!sex) {
+            Alert.alert('Error', 'Completati campul sex.');
+            return;
+        }
+    
+        if (!varsta) {
+            Alert.alert('Error', 'Completati campul varsta.');
+            return;
+        }
+    
+        if (!inaltime) {
+            Alert.alert('Error', 'Completati campul inaltime.');
+            return;
+        }
+    
+        if (!greutate) {
+            Alert.alert('Error', 'Completati campul greutate.');
+            return;
+        }
+    
+        if (!afectiune) {
+            Alert.alert('Error', 'Completati campul afectiune.');
+            return;
+        }
+    
+        if (!fumator) {
+            Alert.alert('Error', 'Completati campul fumator.');
+            return;
+        }
+    
+        if (!practicSport) {
+            Alert.alert('Error', 'Completati campul practic sport.');
+            return;
+        }
         if (user && sex && varsta && inaltime && greutate && afectiune && fumator && practicSport) {
-
           const currentUser = auth.currentUser;
           const currentUserDisplayName = currentUser.displayName;
 
@@ -59,7 +92,7 @@ const AddScreen = () => {
               Alert.alert('Error', 'Failed to save data: ' + error.message);
             });
           } else {
-            Alert.alert('Error', 'Please fill in all fields.');
+            Alert.alert('Error', 'Completati toate campurile!');
           }
     };
   

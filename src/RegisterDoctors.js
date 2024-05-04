@@ -20,8 +20,37 @@ const RegisterDoctors = () => {
   }, [navigation]);
 
   const handleSignUp = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!name) {
+      Alert.alert('Error', 'Completati campul nume.');
+      return;
+    }
+    if (!prenume) {
+      Alert.alert('Error', 'Completati campul prenume.');
+      return;
+    }
+    if (!adresaCabinet) {
+      Alert.alert('Error', 'Completati campul adresa cabinet.');
+      return;
+    }
+    if (!email) {
+      Alert.alert('Error', 'Completati campul email.');
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      Alert.alert('Error', 'Introduceti o adesa de email valida.');
+      return;
+    }
+    if (!password) {
+      Alert.alert('Error', 'Completati campul parolei.');
+      return;
+    }
+    if (!confirmPassword) {
+      Alert.alert('Error', 'Completati campul confirmarii parolei.');
+      return;
+    }
     if (password !== confirmPassword) {
-      setErrorMessage("Cele 2 parole nu se potrivesc!");
+      Alert.alert("Error", "Cele 2 parole nu se potrivesc!");
       return;
     }
     auth
@@ -39,10 +68,10 @@ const RegisterDoctors = () => {
         }).then(() => {
           Alert.alert('Success', `Inregistrarea dumneavoastra a avut loc cu success, ${fullName}!`);
         }).catch(error => {
-          console.error("Error adding user data to Firebase Realtime Database:", error);
+          console.error("Eroare in adaugarea datelor.", error);
         });
       }).catch(error => {
-        console.error("Error updating user profile:", error);
+        console.error("Eroare in actualizarea datelor.", error);
       });
     })
     .catch(error => alert(error.message))
