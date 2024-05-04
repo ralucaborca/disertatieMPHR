@@ -22,19 +22,14 @@ const Feedback = ({ route }) => {
 
   const handleSubmit = async () => {
       try {
-          if (!user) {
-              console.error('User not authenticated.');
-              return;
-          }
-
           const currentUser = auth.currentUser;
           const currentUserDisplayName = currentUser.displayName;
           await database.ref('Sugestii medic').push({
-              userId: currentUser.uid, // Changed to use current user ID
+              userId: person.user, // Changed to use current user ID
               userName: currentUserDisplayName,
               stareSanatate: stareSanatate,
               sugestie: sugestie,
-              user: user.uid, // Assuming item.id is the ID of the patient
+              user: currentUser.uid, // Assuming item.id is the ID of the patient
           });
           // Clear input fields after submission
           setStareSanatate('');
@@ -47,23 +42,23 @@ const Feedback = ({ route }) => {
   return (
       <View style={styles.container}>
           <View style={styles.itemContainer}>
-              <Text>Nume pacient: {person.userName}</Text>
-              <Text>Data adaugarii: {person.dateAdded}</Text>
-              <Text>Fumator: {person.fumator}</Text>
-              <Text>Greutate: {person.greutate}</Text>
-              <Text>Afectiune: {person.afectiune}</Text>
-              <Text>Inaltime: {person.inaltime}</Text>
-              <Text>Pacientul practica sport: {person.practicSport}</Text>
-              <Text>Sex: {person.sex}</Text>
-              <Text>Varsta: {person.varsta}</Text>
-              <Text style={{ marginTop: 70 }}>Introduceti starea actuala de sanatate a pacientului:</Text>
+              <Text style={styles.textDisplay}>Nume pacient: {person.userName}</Text>
+              <Text style={styles.textDisplay}>Data adaugarii: {person.dateAdded}</Text>
+              <Text style={styles.textDisplay}>Fumator: {person.fumator}</Text>
+              <Text style={styles.textDisplay}>Greutate: {person.greutate}</Text>
+              <Text style={styles.textDisplay}>Afectiune: {person.afectiune}</Text>
+              <Text style={styles.textDisplay}>Inaltime: {person.inaltime}</Text>
+              <Text style={styles.textDisplay}>Pacientul practica sport: {person.practicSport}</Text>
+              <Text style={styles.textDisplay}>Sex: {person.sex}</Text>
+              <Text style={styles.textDisplay}>Varsta: {person.varsta}</Text>
+              <Text style={{ marginTop: 70, fontSize:20 }}>Introduceti starea actuala de sanatate a pacientului:</Text>
               <TextInput
                   value={stareSanatate}
                   onChangeText={setStareSanatate}
                   placeholder="Stare actuala de sanatate"
                   style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 10, marginTop: 10 }}
               />
-              <Text style={{ marginTop: 20 }}>Introduceti o sugestie pacientului:</Text>
+              <Text style={{ marginTop: 20, fontSize:20 }}>Introduceti o sugestie pacientului:</Text>
               <TextInput
                   value={sugestie}
                   onChangeText={setSugestie}
@@ -104,6 +99,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent: 'center',
         borderRadius:50,
-    }
-
+    },
+    textDisplay:{
+        fontSize:20
+    },
 })

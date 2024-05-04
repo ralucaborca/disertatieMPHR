@@ -41,7 +41,7 @@ const NamesList  = ({data: propData}) => {
     const renderItem = ({ item }) => (
         <TouchableOpacity onPress={() => handleClick(item)}>
         <View style={styles.itemContainer}>
-        {item.userName && <Text>Nume pacient: {item.userName}</Text>}
+        {item.userName && <Text style={styles.textDisplay}>Nume pacient: {item.userName}</Text>}
         </View>
       </TouchableOpacity>
       
@@ -75,5 +75,8 @@ const styles = StyleSheet.create({
       borderRadius: 8,
       width: '100%',
       backgroundColor: '#A9EAFE'
+    },
+    textDisplay:{
+      fontSize:25
     },
 })

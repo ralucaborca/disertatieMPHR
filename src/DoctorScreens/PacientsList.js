@@ -19,15 +19,15 @@ const PacientsList  = ({route}) => {
       <View style={styles.container}>
         <TouchableOpacity onPress={handleFeedbackClick}>
         <View style={styles.itemContainer}>
-            <Text>Nume pacient: {person.userName}</Text>
-            <Text>Data adaugarii: {person.dateAdded}</Text>
-            <Text>Fumator: {person.fumator}</Text>
-            <Text>Greutate: {person.greutate}</Text>
-            <Text>Afectiune: {person.afectiune}</Text>
-            <Text>Inaltime: {person.inaltime}</Text>
-            <Text>Pacientul practica sport: {person.practicSport}</Text>
-            <Text>Sex: {person.sex}</Text>
-            <Text>Varsta: {person.varsta}</Text>
+            <Text style={styles.textDisplay}>Nume pacient: {person.userName}</Text>
+            <Text style={styles.textDisplay}>Data adaugarii: {person.dateAdded}</Text>
+            <Text style={styles.textDisplay}>Fumator: {person.fumator}</Text>
+            <Text style={styles.textDisplay}>Greutate: {person.greutate}</Text>
+            <Text style={styles.textDisplay}>Afectiune: {person.afectiune}</Text>
+            <Text style={styles.textDisplay}>Inaltime: {person.inaltime}</Text>
+            <Text style={styles.textDisplay}>Pacientul practica sport: {person.practicSport}</Text>
+            <Text style={styles.textDisplay}>Sex: {person.sex}</Text>
+            <Text style={styles.textDisplay}>Varsta: {person.varsta}</Text>
         </View>
         </TouchableOpacity>
       </View> 
@@ -53,5 +53,8 @@ const styles = StyleSheet.create({
       borderRadius: 8,
       width: '100%',
       backgroundColor: '#A9EAFE'
+    },
+    textDisplay:{
+      fontSize:23
     },
 })

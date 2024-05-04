@@ -48,9 +48,9 @@ const FeedbackScreen = () => {
   
       const renderItem = ({ item }) => (
         <View  style={styles.itemContainer}>
-           {item.userName && <Text>Nume doctor: {item.userName}</Text>}
-          <Text>Stare de sanatate: {item.stareSanatate}</Text>
-          <Text>Sugestie: {item.sugestie}</Text>
+           {item.userName && <Text style={styles.textDisplay}>Nume doctor: {item.userName}</Text>}
+          <Text style={styles.textDisplay}>Stare de sanatate: {item.stareSanatate}</Text>
+          <Text style={styles.textDisplay}>Sugestie: {item.sugestie}</Text>
         </View>
         
       );
@@ -80,5 +80,8 @@ const styles = StyleSheet.create({
       borderColor: 'gray',
       borderRadius: 8,
       backgroundColor: '#A9EAFE'
+    },
+    textDisplay:{
+      fontSize:21
     },
 })

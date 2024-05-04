@@ -48,14 +48,14 @@ const HistoryScreen = () => {
 
     const renderItem = ({ item }) => (
       <View  style={styles.itemContainer}>
-        <Text>Data adaugarii: {item.dateAdded}</Text>
-        <Text>Fumator: {item.fumator}</Text>
-        <Text>Greutate: {item.greutate}</Text>
-        <Text>Afectiune: {item.afectiune}</Text>
-        <Text>Inaltime: {item.inaltime}</Text>
-        <Text>Pacientul practica sport: {item.practicSport}</Text>
-        <Text>Sex: {item.sex}</Text>
-        <Text>Varsta: {item.varsta}</Text>
+        <Text style={styles.textDisplay}>Data adaugarii: {item.dateAdded}</Text>
+        <Text style={styles.textDisplay}>Fumator: {item.fumator}</Text>
+        <Text style={styles.textDisplay}>Greutate: {item.greutate}</Text>
+        <Text style={styles.textDisplay}>Afectiune: {item.afectiune}</Text>
+        <Text style={styles.textDisplay}>Inaltime: {item.inaltime}</Text>
+        <Text style={styles.textDisplay}>Pacientul practica sport: {item.practicSport}</Text>
+        <Text style={styles.textDisplay}>Sex: {item.sex}</Text>
+        <Text style={styles.textDisplay}>Varsta: {item.varsta}</Text>
       </View>
       
     );
@@ -86,5 +86,8 @@ const styles = StyleSheet.create({
       borderColor: 'gray',
       borderRadius: 8,
       backgroundColor: '#FBE698'
+    },
+    textDisplay:{
+      fontSize:21
     },
 })
