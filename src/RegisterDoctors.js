@@ -45,6 +45,10 @@ const RegisterDoctors = () => {
       Alert.alert('Error', 'Completati campul parolei.');
       return;
     }
+    if (password.length < 6) {
+      Alert.alert("Error", "Parola trebuie sa aiba cel putin 6 caractere!");
+      return;
+    }
     if (!confirmPassword) {
       Alert.alert('Error', 'Completati campul confirmarii parolei.');
       return;
@@ -53,6 +57,7 @@ const RegisterDoctors = () => {
       Alert.alert("Error", "Cele 2 parole nu se potrivesc!");
       return;
     }
+    
     database.ref('Doctori').orderByChild('email').equalTo(email).once('value', snapshot => {
       if (snapshot.exists()) {
           Alert.alert('Error', 'Adresa de email este deja folosita.');
