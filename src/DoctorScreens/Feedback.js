@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import React, {useState, useEffect} from "react";
 import {database, auth} from '../../config';
 import { useNavigation} from '@react-navigation/native';
@@ -49,6 +49,7 @@ const Feedback = ({ route }) => {
   };
 
   return (
+    <ScrollView>
       <View style={styles.container}>
           <View style={styles.itemContainer}>
               <Text style={styles.textDisplay}>Nume pacient: {person.userName}</Text>
@@ -82,6 +83,7 @@ const Feedback = ({ route }) => {
               </TouchableOpacity>
           </View>
       </View>
+      </ScrollView>
   );
 }
 

@@ -21,8 +21,8 @@ const AddScreen = () => {
     }, []); 
 
     const formatDateTime = (date) => {
-      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-      return date.toLocaleDateString('en-GB', options);
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return date.toLocaleDateString('ro-RO', options);
     };
   
     const handleSaveData = () => {
@@ -62,40 +62,68 @@ const AddScreen = () => {
         }
         if (user && sex && varsta && inaltime && greutate && afectiune && fumator && practicSport) {
           const currentUser = auth.currentUser;
-          const currentUserDisplayName = currentUser.displayName;
+    const currentUserUid = currentUser.uid;
 
-          const currentDate = new Date();
-           const formattedDate = formatDateTime(currentDate);
-            database.ref().child('Date pacient').push({
-              user: user.uid,
-              userName: currentUserDisplayName,
-              sex: sex,
-              varsta: varsta,
-              inaltime: inaltime,
-              greutate: greutate,
-              afectiune: afectiune,
-              fumator: fumator,
-              practicSport: practicSport,
-              dateAdded: formattedDate
-            })
-            .then(() => {
-              Alert.alert('Success', 'Datele au fost adaugate cu success!');
-              setSex('');
-              setVarsta('');
-              setInaltime('');
-              setGreutate('');
-              setAfectiune('');
-              setFumator('');
-              setPracticSport('');
-            })
-            .catch(error => {
-              Alert.alert('Error', 'Failed to save data: ' + error.message);
+    // Check if data for the current user already exists in the database
+    database.ref('Date pacient').orderByChild('user').equalTo(currentUserUid).once('value', snapshot => {
+        if (snapshot.exists()) {
+            // Data exists for the current user, update it
+            snapshot.forEach(childSnapshot => {
+                const key = childSnapshot.key;
+                database.ref('Date pacient').child(key).update({
+                    sex: sex,
+                    varsta: varsta,
+                    inaltime: inaltime,
+                    greutate: greutate,
+                    afectiune: afectiune,
+                    fumator: fumator,
+                    practicSport: practicSport,
+                    dateAdded: formatDateTime(new Date())
+                }).then(() => {
+                    Alert.alert('Success', 'Datele au fost actualizate cu succes!');
+                    // Clear input fields after successful update
+                    setSex('');
+                    setVarsta('');
+                    setInaltime('');
+                    setGreutate('');
+                    setAfectiune('');
+                    setFumator('');
+                    setPracticSport('');
+                }).catch(error => {
+                    Alert.alert('Error', 'Failed to update data: ' + error.message);
+                });
             });
-          } else {
-            Alert.alert('Error', 'Completati toate campurile!');
-          }
-    };
-  
+        } else {
+            // Data doesn't exist for the current user, add new entry
+            const currentUserDisplayName = currentUser.displayName;
+            database.ref('Date pacient').push({
+                user: currentUserUid,
+                userName: currentUserDisplayName,
+                sex: sex,
+                varsta: varsta,
+                inaltime: inaltime,
+                greutate: greutate,
+                afectiune: afectiune,
+                fumator: fumator,
+                practicSport: practicSport,
+                dateAdded: formatDateTime(new Date())
+            }).then(() => {
+                Alert.alert('Success', 'Datele au fost adaugate cu success!');
+                // Clear input fields after successful addition
+                setSex('');
+                setVarsta('');
+                setInaltime('');
+                setGreutate('');
+                setAfectiune('');
+                setFumator('');
+                setPracticSport('');
+            }).catch(error => {
+                Alert.alert('Error', 'Failed to save data: ' + error.message);
+            });
+        }
+    });
+};
+};
     return (
       <KeyboardAvoidingView >
         <ScrollView>
