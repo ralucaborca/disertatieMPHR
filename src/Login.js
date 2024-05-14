@@ -54,6 +54,9 @@ const Login = () => {
       .catch(error => {
         if (error.code === 'auth/user-not-found') {
           Alert.alert('Error', 'Adresa de email nu exista in baza de date.');
+        } else if (error.code === 'auth/wrong-password') {
+          // Eroare: parola greșită
+          Alert.alert('Error', 'Parola introdusa este incorecta.');
         } else {
           alert(error.message);
         }
