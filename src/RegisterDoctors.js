@@ -53,6 +53,10 @@ const RegisterDoctors = () => {
       Alert.alert("Error", "Cele 2 parole nu se potrivesc!");
       return;
     }
+    database.ref('Doctori').orderByChild('email').equalTo(email).once('value', snapshot => {
+      if (snapshot.exists()) {
+          Alert.alert('Error', 'Adresa de email este deja folosita.');
+      } else {
     auth
     .createUserWithEmailAndPassword(email, password)
     .then(userCredentials => {
@@ -75,7 +79,9 @@ const RegisterDoctors = () => {
       });
     })
     .catch(error => alert(error.message))
-}
+    }
+    }
+  )}
 
   return(
     <KeyboardAvoidingView style={styles.container}>
