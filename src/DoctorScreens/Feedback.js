@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from "react-native";
 import React, {useState, useEffect} from "react";
 import {database, auth} from '../../config';
 import { useNavigation} from '@react-navigation/native';
@@ -20,6 +20,11 @@ const Feedback = ({ route }) => {
       return subscriber;
   }, [navigation]);
 
+  const formatDateTime = (date) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('ro-RO', options);
+  };
+
   const handleSubmit = async () => {
 
     if (!stareSanatate) {
@@ -34,15 +39,17 @@ const Feedback = ({ route }) => {
           const currentUser = auth.currentUser;
           const currentUserDisplayName = currentUser.displayName;
           await database.ref('Sugestii medic').push({
-              userId: person.user, // Changed to use current user ID
+              userId: person.user,
               userName: currentUserDisplayName,
               stareSanatate: stareSanatate,
               sugestie: sugestie,
-              user: currentUser.uid, // Assuming item.id is the ID of the patient
+              user: currentUser.uid,
+              dataAdaugarii: formatDateTime(new Date())
           });
-          // Clear input fields after submission
+
           setStareSanatate('');
           setSugestie('');
+          Alert.alert('Success', 'Sugestia a fost adaugata cu succes!');
       } catch (error) {
           console.error('Error submitting data:', error);
       }
