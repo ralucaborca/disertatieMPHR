@@ -52,7 +52,6 @@ const Login = () => {
         setPassword('');
       })
       .catch(error => {
-        // Verificare dacă eroarea este din cauza lipsei adresei de email în baza de date
         if (error.code === 'auth/user-not-found') {
           Alert.alert('Error', 'Adresa de email nu exista in baza de date.');
         } else {
