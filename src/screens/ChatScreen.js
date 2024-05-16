@@ -1,78 +1,113 @@
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
-import React from "react";
-import { useNavigation} from '@react-navigation/native';
-import { BarChart, Grid, LineChart } from 'react-native-chart-kit';
+import React, { useState, useEffect } from 'react';
+import { View, Button, Image, Alert, StyleSheet } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { storage, database } from '../../config';
 
+const ChatScreen = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('Permission denied', 'Please grant access to your photo library to use this feature.');
+      }
+    })();
+  }, []);
+
+  const handleChooseImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
   
-  const ChatScreen = () => {
-
-      return (
-        <View>
-        <Text style={styles.title}>Graficul pulsului</Text>
-        <LineChart
-          data={{
-            labels: ["January", "February", "March", "April", "May", "June"],
-            datasets: [
-              {
-                data: [
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100
-                ]
-              }
-            ]
-          }}
-          width={Dimensions.get("window").width} // from react-native
-          height={220}
-          yAxisLabel="$"
-          yAxisSuffix="k"
-          yAxisInterval={1} // optional, defaults to 1
-          chartConfig={{
-            backgroundColor: "#FBE698",
-            backgroundGradientFrom: "#fb8c00",
-            backgroundGradientTo: "#ffa726",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
-              borderRadius: 16
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "#ffa726"
-            }
-          }}
-          bezier
-          style={{
-            marginVertical: 8,
-            borderRadius: 16
-          }}
-        />
-      </View>
-  )};
-
-  export default ChatScreen;
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      //backgroundColor: '#F5FCFF',
-    },
-    graph: {
-      marginVertical: 8,
-      borderRadius: 16,
-    },
-    title:{
-        marginTop:50,
-        justifyContent: 'center',
-        alignItems: 'center',
+      if (!result.cancelled) {
+        if (result.assets && result.assets.length > 0 && result.assets[0].uri) {
+          console.log("URI:", result.assets[0].uri);
+          setSelectedImage(result.assets[0].uri);
+        } else {
+          Alert.alert('Error', 'A aparut o eroare pentru URI. Incearca din nou.');
+        }
+      } else {
+        console.log("Image selection cancelled.");
+      }
+    } catch (error) {
+      Alert.alert('Error', 'A aparut o eroare. Incearca din nou.');
     }
-  });
+  };
+
+  const handleUploadImage = async () => {
+    try {
+      if (!selectedImage) {
+        Alert.alert('Error', 'Selectati o imagine prima data.');
+        return;
+      }
   
+      const response = await fetch(selectedImage);
+      
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
   
+      const blob = await response.blob();
+  
+      const storageRef = storage.ref();
+      const imageName = Date.now() + '.jpg';
+      const imageRef = storageRef.child('images/' + imageName);
+  
+      await imageRef.put(blob);
+      const downloadURL = await imageRef.getDownloadURL();
+  
+      await database.ref('Imagini').push({
+        imageURL: downloadURL,
+        createdAt: Date.now()
+      });
+  
+      Alert.alert('Success', 'Imagine adaugata cu success!');
+    } catch (error) {
+      console.error("Eroare:", error);
+      Alert.alert('Error', 'A aparut o eroare. Incearca din nou.');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Button title="Selecteaza o imagine" onPress={handleChooseImage} style={styles.button}/>
+      {selectedImage && (
+        <Image source={{ uri: selectedImage }} style={styles.image} />
+      )}
+      <Button
+        title="Incarca imaginea"
+        onPress={handleUploadImage}
+        disabled={!selectedImage}
+        style={styles.button}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width: 350,
+    height: 300,
+    marginTop: 20,
+  },
+  button:{
+    marginTop:30,
+    height:70,
+    backgroundColor:'#FFAEBC',
+    alignItems:'center',
+    justifyContent: 'center',
+    borderRadius:50,
+},
+});
+
+export default ChatScreen;

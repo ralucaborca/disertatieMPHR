@@ -6,6 +6,8 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "permissions": ["mediaLibrary"],
+    "plugins": ["expo-image-picker"],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -26,5 +28,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
+    
   }
 }

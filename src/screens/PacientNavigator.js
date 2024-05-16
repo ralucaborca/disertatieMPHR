@@ -46,15 +46,13 @@ const PacientNavigator = () => {
                 }}
             />
             <Tab.Screen
-                name="Chat"
+                name="Imagine"
                 component={ChatScreen}
                 options={({ route }) => ({
-                    tabBarLabel: 'Chat',
+                    tabBarLabel: 'Imagine',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="chat" color={color} size={size} />
+                        <MaterialCommunityIcons name="image" color={color} size={size} />
                     ),
-                    // Dynamically set the header title based on the active screen
-                    headerTitle: route.name === 'ChatWPacient' ? 'ChatWPacient' : undefined,
                 })}
             />
             <Tab.Screen
