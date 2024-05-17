@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Button, Image, Alert, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { storage, database } from '../../config';
+import { storage, database, auth } from '../../config';
 
 const ChatScreen = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [user, setUser] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -14,6 +15,24 @@ const ChatScreen = () => {
       }
     })();
   }, []);
+   
+  useEffect(() => {
+    const subscriber = auth.onAuthStateChanged(user => {
+      setUser(user);
+    });
+    return subscriber;
+  }, []); 
+
+  const formatDateTime = (date) => {
+    const options = { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+     };
+    return date.toLocaleDateString('ro-RO', options);
+  };
 
   const handleChooseImage = async () => {
     try {
@@ -51,6 +70,9 @@ const ChatScreen = () => {
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
+      const currentUser = auth.currentUser;
+      const currentUserUid = currentUser.uid;
+      const currentUserDisplayName = currentUser.displayName;
   
       const blob = await response.blob();
   
@@ -63,7 +85,9 @@ const ChatScreen = () => {
   
       await database.ref('Imagini').push({
         imageURL: downloadURL,
-        createdAt: Date.now()
+        dateAdded: formatDateTime(new Date()),
+        user: currentUserUid,
+        name: currentUserDisplayName
       });
   
       Alert.alert('Success', 'Imagine adaugata cu success!');
