@@ -14,7 +14,6 @@ import Dashboard from './src/Dashboard';
 import Profile from './src/DoctorScreens/Profile';
 import PacientsList from './src/DoctorScreens/PacientsList';
 import Feedback from './src/DoctorScreens/Feedback';
-import ChatWPacient from './src/DoctorScreens/ChatWPacient';
 import RegisterPage from './src/RegisterPage';
 import DoctorNavigator from './src/DoctorScreens/DoctorNavigator';
 import PacientNavigator from './src/screens/PacientNavigator';
@@ -24,6 +23,7 @@ import FirstScreen from './src/screens/FirstScreen';
 import HistoryScreen from './src/screens/HistoryScreen';
 import FeedbackScreen from './src/screens/FeedbackScreen';
 import NamesList from './src/DoctorScreens/NamesList';
+import PulseImages from './src/DoctorScreens/PulseImages';
 
 const Stack = createStackNavigator();
 
@@ -41,7 +41,7 @@ const App = (props) => {
         <Stack.Screen name="PacientsList" component={PacientsList}/>
         <Stack.Screen name="NamesList" component={NamesList}/>
         <Stack.Screen name="Feedback" component={Feedback}/>
-        <Stack.Screen name="ChatWPacient" component={ChatWPacient}/>
+        <Stack.Screen name="PulseImages" component={PulseImages}/>
         <Stack.Screen name="DoctorNavigator" component={DoctorNavigator}/>
         <Stack.Screen name="PacientNavigator" component={PacientNavigator}/>
         <Stack.Screen name="AddScreen" component={AddScreen}/>

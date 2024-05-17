@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import ChatWPacient from "./ChatWPacient";
-import PacientsList from "./PacientsList";
 import Profile from "./Profile";
 import { useNavigation, useRoute } from '@react-navigation/native';
 import NamesList from "./NamesList";
+import PulseImages from "./PulseImages";
 
 const Tab = createBottomTabNavigator();
 
@@ -35,15 +34,13 @@ const DoctorNavigator = () => {
                 }}
             />
             <Tab.Screen
-                name="ChatWPacient"
-                component={ChatWPacient}
+                name="PulseImages"
+                component={PulseImages}
                 options={({ route }) => ({
-                    tabBarLabel: 'Chat',
+                    tabBarLabel: 'Images',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="chat" color={color} size={size} />
+                        <MaterialCommunityIcons name="image" color={color} size={size} />
                     ),
-                    // Dynamically set the header title based on the active screen
-                    headerTitle: route.name === 'ChatWPacient' ? 'ChatWPacient' : undefined,
                 })}
             />
             <Tab.Screen
