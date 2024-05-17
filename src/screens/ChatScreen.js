@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, Image, Alert, StyleSheet } from 'react-native';
+import { View, Button, Image, Alert, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { storage, database } from '../../config';
 
@@ -75,16 +75,21 @@ const ChatScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Button title="Selecteaza o imagine" onPress={handleChooseImage} style={styles.button}/>
+      <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleChooseImage}
+              >
+                  <Text style={{fontWeight:'bold', fontSize:16}}>Selecteaza o imagine</Text>
+              </TouchableOpacity>
       {selectedImage && (
         <Image source={{ uri: selectedImage }} style={styles.image} />
       )}
-      <Button
-        title="Incarca imaginea"
-        onPress={handleUploadImage}
-        disabled={!selectedImage}
-        style={styles.button}
-      />
+      <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleUploadImage}
+              >
+                  <Text style={{fontWeight:'bold', fontSize:16}}>Incarca imaginea</Text>
+              </TouchableOpacity>
     </View>
   );
 };
@@ -101,9 +106,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button:{
+    width: 260,
     marginTop:30,
     height:70,
-    backgroundColor:'#FFAEBC',
+    backgroundColor:'#FBE698',
     alignItems:'center',
     justifyContent: 'center',
     borderRadius:50,
