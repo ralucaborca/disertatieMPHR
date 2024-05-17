@@ -49,8 +49,8 @@ const PulseImages = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Text style={styles.textDisplay}>Name: {item.name}</Text>
-      <Text style={styles.textDisplay}>Date Added: {item.dateAdded}</Text>
+      <Text style={styles.textDisplay}>Nume: {item.name}</Text>
+      <Text style={styles.textDisplay}>Data adaugarii: {item.dateAdded}</Text>
       <Image source={{ uri: item.imageURL }} style={styles.image} />
     </View>
   );
