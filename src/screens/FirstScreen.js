@@ -32,7 +32,7 @@ const FirstScreen = () => {
         style={styles.button}
         onPress={handleSignOut}
         >
-            <Text>Sign Out</Text>
+            <Text>Iesi din cont</Text>
         </TouchableOpacity>     
      </View>
      )

@@ -24,10 +24,10 @@ const DoctorNavigator = () => {
             screenOptions={{ headerShown: true }}
         >
             <Tab.Screen
-                name="Profile"
+                name="Profil"
                 component={Profile}
                 options={{
-                    tabBarLabel: 'Profile',
+                    tabBarLabel: 'Profil',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="account" color={color} size={size} />
                     ),
@@ -37,7 +37,7 @@ const DoctorNavigator = () => {
                 name="PulseImages"
                 component={PulseImages}
                 options={({ route }) => ({
-                    tabBarLabel: 'Images',
+                    tabBarLabel: 'Imagini',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="image" color={color} size={size} />
                     ),
@@ -47,7 +47,7 @@ const DoctorNavigator = () => {
                 name="NamesList"
                 component={NamesList}
                 options={{
-                    tabBarLabel: 'List',
+                    tabBarLabel: 'Lista',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="format-list-bulleted" color={color} size={size} />
                     ),

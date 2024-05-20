@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
-import React from "react";
+import React , {useEffect} from "react";
 import { auth, } from "../../config";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -8,6 +8,12 @@ const Tab = createBottomTabNavigator();
 
 const Profile = () => {
     const navigation = useNavigation();
+
+    useEffect(() => {
+        navigation.setOptions({
+          title: 'Profil',
+        });
+      }, [navigation]);
     
     const handleSignOut = async () => {
         try {
@@ -26,7 +32,7 @@ const Profile = () => {
         style={styles.button}
         onPress={handleSignOut}
         >
-            <Text>Sign Out</Text>
+            <Text>Iesi din cont</Text>
         </TouchableOpacity>     
      </View>
     );

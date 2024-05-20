@@ -10,7 +10,7 @@ const PulseImages = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: 'Images',
+      title: 'Imagini',
     });
   }, [navigation]);
 
