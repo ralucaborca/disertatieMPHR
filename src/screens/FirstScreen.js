@@ -40,13 +40,13 @@ const FirstScreen = () => {
         style={styles.button}
         onPress={handleData}
         >
-            <Text>Date personale</Text>
+            <Text style={{fontWeight:'bold', fontSize:16}}>Date personale</Text>
         </TouchableOpacity> 
         <TouchableOpacity 
         style={styles.button}
         onPress={handleSignOut}
         >
-            <Text>Iesi din cont</Text>
+            <Text style={{fontWeight:'bold', fontSize:16}}>Iesi din cont</Text>
         </TouchableOpacity>     
      </View>
      )

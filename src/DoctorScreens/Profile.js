@@ -32,7 +32,7 @@ const Profile = () => {
         style={styles.button}
         onPress={handleSignOut}
         >
-            <Text>Iesi din cont</Text>
+            <Text style={{fontWeight:'bold', fontSize:16}}>Iesi din cont</Text>
         </TouchableOpacity>     
      </View>
     );
