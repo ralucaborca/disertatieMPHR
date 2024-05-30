@@ -17,6 +17,14 @@ const FirstScreen = () => {
         }
       };
 
+      const handleData = async () => {
+        try {
+          navigation.navigate('PacientsData');
+        } catch (error) {
+          console.error('Error', error);
+        }
+      };
+
     useEffect(() => {
         navigation.setOptions({
           title: 'Profil', 
@@ -28,6 +36,12 @@ const FirstScreen = () => {
         <View style={styles.container}>
         <Text style={styles.nameDisplay}> Nume: {auth.currentUser?.displayName}</Text>
         <Text style={styles.textDisplay}> Email: {auth.currentUser?.email}</Text>
+        <TouchableOpacity 
+        style={styles.button}
+        onPress={handleData}
+        >
+            <Text>Date personale</Text>
+        </TouchableOpacity> 
         <TouchableOpacity 
         style={styles.button}
         onPress={handleSignOut}

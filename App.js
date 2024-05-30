@@ -24,6 +24,7 @@ import HistoryScreen from './src/screens/HistoryScreen';
 import FeedbackScreen from './src/screens/FeedbackScreen';
 import NamesList from './src/DoctorScreens/NamesList';
 import PulseImages from './src/DoctorScreens/PulseImages';
+import PacientsData from './src/screens/PacientsData';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,7 @@ const App = (props) => {
         <Stack.Screen name="FirstScreen" component={FirstScreen}/>
         <Stack.Screen name="HistoryScreen" component={HistoryScreen}/>
         <Stack.Screen name="FeedbackScreen" component={FeedbackScreen}/>
+        <Stack.Screen name="PacientsData" component={PacientsData}/>
       </Stack.Navigator>
     </NavigationContainer>
       
