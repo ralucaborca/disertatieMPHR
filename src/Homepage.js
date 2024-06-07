@@ -7,7 +7,7 @@ function Homepage() {
 
     useEffect(() => {
         navigation.setOptions({
-          title: 'Aplicatia inimii',
+          title: 'Heart MAP',
         });
       }, [navigation]);
 

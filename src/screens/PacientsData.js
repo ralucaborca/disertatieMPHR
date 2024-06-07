@@ -7,6 +7,12 @@ const PacientsData  = ({data: propData}) => {
     const [data, setData] = useState(propData || []);
     const navigation = useNavigation();
     const [userq, setUserQ] = useState(null);
+
+    useEffect(() => {
+      navigation.setOptions({
+        title: 'Date personale',
+      });
+    }, [navigation]);
   
     const fetchData = async (user) => {
         try {
