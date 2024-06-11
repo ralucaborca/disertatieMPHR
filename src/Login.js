@@ -38,10 +38,10 @@ const Login = () => {
         
         database.ref('Doctori/' + user.uid).once('value').then(snapshot => {
           if (snapshot.exists()) {
-            // User is a doctor
+            // User - doctor
             navigation.navigate('DoctorNavigator');
           } else {
-            // User is a patient
+            // User - pacient
             navigation.navigate('PacientNavigator');
           }
         }).catch(error => {

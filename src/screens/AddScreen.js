@@ -64,10 +64,8 @@ const AddScreen = () => {
           const currentUser = auth.currentUser;
     const currentUserUid = currentUser.uid;
 
-    // Check if data for the current user already exists in the database
     database.ref('Date pacient').orderByChild('user').equalTo(currentUserUid).once('value', snapshot => {
         if (snapshot.exists()) {
-            // Data exists for the current user, update it
             snapshot.forEach(childSnapshot => {
                 const key = childSnapshot.key;
                 database.ref('Date pacient').child(key).update({
@@ -81,7 +79,6 @@ const AddScreen = () => {
                     dateAdded: formatDateTime(new Date())
                 }).then(() => {
                     Alert.alert('Success', 'Datele au fost actualizate cu succes!');
-                    // Clear input fields after successful update
                     setSex('');
                     setVarsta('');
                     setInaltime('');
@@ -94,7 +91,6 @@ const AddScreen = () => {
                 });
             });
         } else {
-            // Data doesn't exist for the current user, add new entry
             const currentUserDisplayName = currentUser.displayName;
             database.ref('Date pacient').push({
                 user: currentUserUid,
@@ -109,7 +105,6 @@ const AddScreen = () => {
                 dateAdded: formatDateTime(new Date())
             }).then(() => {
                 Alert.alert('Success', 'Datele au fost adaugate cu success!');
-                // Clear input fields after successful addition
                 setSex('');
                 setVarsta('');
                 setInaltime('');

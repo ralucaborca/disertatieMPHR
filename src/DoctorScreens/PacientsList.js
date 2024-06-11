@@ -1,5 +1,5 @@
-import { StyleSheet, View, Text, FlatList, TouchableOpacity } from "react-native";
-import React, {useState, useEffect} from "react";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React from "react";
 import {useNavigation} from '@react-navigation/native';
 
 const PacientsList  = ({route}) => {

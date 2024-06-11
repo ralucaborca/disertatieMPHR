@@ -7,7 +7,7 @@ const Feedback = ({ route }) => {
   const { person } = route.params;
   const [stareSanatate, setStareSanatate] = useState('');
   const [sugestie, setSugestie] = useState('');
-  const [user, setUser] = useState(null); // Changed to null to avoid potential issues
+  const [user, setUser] = useState(null);
   const navigation = useNavigation();
 
   useEffect(() => {

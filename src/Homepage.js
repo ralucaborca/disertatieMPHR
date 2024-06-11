@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image} from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
 
 function Homepage() {
